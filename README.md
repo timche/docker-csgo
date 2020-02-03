@@ -1,6 +1,6 @@
 # docker-csgo
 
-> [CS:GO Dedicated Server](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers) with [Metamod:Source](https://www.sourcemm.net/), [SourceMod](https://www.sourcemod.net/), [csgo-pug-setup](https://github.com/splewis/csgo-pug-setup) and [csgo-practice-mode](https://github.com/splewis/csgo-practice-mode)
+> [Counter-Strike: Global Offensive Dedicated Server](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers)
 
 ## How to Use This Image
 
@@ -45,7 +45,7 @@ Start the server with a specific map.
 
 ##### `CSGO_MAX_PLAYERS`
 
-Default: `12`
+Default: `16`
 
 The maximum players allowed to join the server.
 
@@ -105,7 +105,7 @@ Print commands in the log.
 
 Additional [parameters](https://developer.valvesoftware.com/wiki/Command_Line_Options#Command-line_parameters) to pass to `srcds_run`.
 
-### Advanced Configuration
+### Populate with Own Configs
 
 The server can be populated with own config files by copying the files from the custom configs directory located at [`CSGO_CUSTOM_CONFIGS_DIR`](#csgo_custom_configs_dir) to the `csgo` folder at each start of the container. [`CSGO_CUSTOM_CONFIGS_DIR`](#csgo_custom_configs_dir) is a mounted directory from the host system. The custom configs directory must have same folder structure as the `csgo` folder in order to add or overwrite the files at the paths.
 
