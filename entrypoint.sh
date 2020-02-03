@@ -2,9 +2,7 @@
 
 set -e
 
-if [ -n "$CSGO_DEBUG" ]; then
-  set -x
-fi
+set -x
 
 shopt -s extglob
 
@@ -54,13 +52,13 @@ installServer() {
 
   echo '> Done'
 
-  installMod $mmsource
-  installMod $sourcemod
+  # installMod $mmsource
+  # installMod $sourcemod
 
-  installPlugin $practicemode
-  installPlugin $pugsetup
+  # installPlugin $practicemode
+  # installPlugin $pugsetup
 
-  managePlugins
+  # managePlugins
 
   touch $SERVER_INSTALLED_LOCK_FILE
 
@@ -115,7 +113,7 @@ startServer() {
       -nobreakpad \
       -tickrate "${CSGO_TICKRATE-128}" \
       -port "${CSGO_PORT-27015}" \
-      -maxplayers_override "${CSGO_MAX_PLAYERS-12}" \
+      -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
       +game_type "${CSGO_GAME_TYPE-0}" \
       +game_mode "${CSGO_GAME_MODE-1}" \
       +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
