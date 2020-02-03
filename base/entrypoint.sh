@@ -6,40 +6,11 @@ set -x
 
 shopt -s extglob
 
-mmsource='https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz'
-sourcemod='https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6458-linux.tar.gz'
-
-practicemode='https://github.com/splewis/csgo-practice-mode/releases/download/1.3.3/practicemode_1.3.3.zip'
-pugsetup='https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip'
-
 STEAM_DIR=$HOME/Steam
 SERVER_DIR=$HOME/server
 SERVER_INSTALLED_LOCK_FILE=$SERVER_DIR/installed.lock
 CSGO_DIR=$SERVER_DIR/csgo
 CSGO_CUSTOM_CONFIGS_DIR="${CSGO_CUSTOM_CONFIGS_DIR-/var/csgo}"
-
-installMod() {
-    echo "> Installing/Updating mod from $1 ..."
-    cd $CSGO_DIR
-    wget -qO- $1 | tar zxf -
-    echo '> Done'
-}
-
-installPlugin() {
-    echo "> Installing/Updating plugin from $1 ..."
-    cd $CSGO_DIR
-    wget -q -O plugin.zip $1
-    unzip -qn plugin.zip
-    rm plugin.zip
-    echo '> Done'
-}
-
-managePlugins() {
-    echo "> Managing plugins ..."
-    cd $CSGO_DIR/addons/sourcemod/plugins
-    mv !(admin-flatfile.smx|botmimic.smx|csutils.smx|practicemode.smx|pugsetup.smx|pugsetup_damageprint.smx|pugsetup_teamlocker.smx|disabled) disabled
-    echo '> Done'
-}
 
 installServer() {
   echo '> Installing server ...'
@@ -51,14 +22,6 @@ installServer() {
     +quit
 
   echo '> Done'
-
-  # installMod $mmsource
-  # installMod $sourcemod
-
-  # installPlugin $practicemode
-  # installPlugin $pugsetup
-
-  # managePlugins
 
   touch $SERVER_INSTALLED_LOCK_FILE
 
@@ -107,7 +70,6 @@ startServer() {
   $SERVER_DIR/srcds_run \
       -game csgo \
       -console \
-      -nohltv \
       -norestart \
       -usercon \
       -nobreakpad \
