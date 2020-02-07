@@ -73,8 +73,9 @@ startServer() {
       -norestart \
       -usercon \
       -nobreakpad \
-      -tickrate "${CSGO_TICKRATE-128}" \
+      +ip "${CSGO_IP-0.0.0.0}" \
       -port "${CSGO_PORT-27015}" \
+      -tickrate "${CSGO_TICKRATE-128}" \
       -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
       +game_type "${CSGO_GAME_TYPE-0}" \
       +game_mode "${CSGO_GAME_MODE-1}" \
