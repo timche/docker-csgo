@@ -31,6 +31,12 @@ Your [Game Server Login Token](https://steamcommunity.com/dev/managegameservers)
 
 Your [Steam Web API Key](https://steamcommunity.com/dev/apikey) to download workshop maps.
 
+##### `CSGO_IP`
+
+Default: `0.0.0.0`
+
+The IP the server is assigned to. In most cases the default value is sufficient, but if you want to run a [GOTV](https://developer.valvesoftware.com/wiki/SourceTV) or have issues connecting to the server, the actual IP of the server should be set.
+
 ##### `CSGO_PORT`
 
 Default: `27015`
