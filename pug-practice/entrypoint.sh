@@ -69,7 +69,7 @@ applyCustomConfigs() {
 
   if [ -d "$CSGO_CUSTOM_CONFIGS_DIR" ]; then
       echo '> Found custom configs, applying ...'
-      rsync -ri $CSGO_CUSTOM_CONFIGS_DIR/ $CSGO_DIR
+      rsync -rti $CSGO_CUSTOM_CONFIGS_DIR/ $CSGO_DIR
       echo '> Done'
   else
       echo '> No custom configs found to apply'
