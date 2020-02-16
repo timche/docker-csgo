@@ -8,6 +8,7 @@ RUN apt-get update \
     ca-certificates=20190110 \
     rsync=3.1.3-6 \
     unzip=6.0-23+deb10u1 \
+    wait-for-it \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m csgo
