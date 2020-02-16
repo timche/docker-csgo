@@ -11,7 +11,7 @@ $ docker run \
   timche/csgo
 ```
 
-- The server will be installed on a named volume `csgo` to [persist the server files](https://docs.docker.com/storage/).
+- The server will be installed on a volume named `csgo` to [ensure persistence of server files](https://docs.docker.com/storage/).
 - The server will be running on the default port `27015` on the `host` network for [optimal network performance](https://docs.docker.com/network/host/)
 - The server will be running in LAN mode since a Game Server Login Token (GSLT) is required to run the server on the internet.
 
@@ -35,7 +35,7 @@ Your [Steam Web API Key](https://steamcommunity.com/dev/apikey) to download work
 
 Default: `0.0.0.0`
 
-The IP the server is assigned to. In most cases the default value is sufficient, but if you want to run a [GOTV](https://developer.valvesoftware.com/wiki/SourceTV) or have issues connecting to the server, the actual IP of the server should be set.
+The IP the server is assigned to. In most cases the default value is sufficient, but if you want to run a [GOTV](https://developer.valvesoftware.com/wiki/SourceTV) server or have issues connecting to the server, the actual IP of the server should be set.
 
 ##### `CSGO_PORT`
 
@@ -101,7 +101,7 @@ The map group.
 
 Default: `/var/csgo`
 
-Absolute path to a directory in the container containing custom config files. Changing this is not recommended in order to follow the documentation.
+Absolute path to a directory in the container containing custom config files and maps. Changing this is not recommended in order to follow the documentation.
 
 ##### `CSGO_DEBUG`
 
@@ -111,9 +111,9 @@ Print commands in the log.
 
 Additional [parameters](https://developer.valvesoftware.com/wiki/Command_Line_Options#Command-line_parameters) to pass to `srcds_run`.
 
-### Populate with Own Configs
+### Populate with Own Configs and Maps
 
-The server can be populated with own config files by copying the files from the custom configs directory located at [`CSGO_CUSTOM_CONFIGS_DIR`](#csgo_custom_configs_dir) to the `csgo` folder at each start of the container. [`CSGO_CUSTOM_CONFIGS_DIR`](#csgo_custom_configs_dir) is a mounted directory from the host system. The custom configs directory must have same folder structure as the `csgo` folder in order to add or overwrite the files at the paths.
+The server can be populated with your own config files and maps by copying the files from the custom configs directory located at [`CSGO_CUSTOM_CONFIGS_DIR`](#csgo_custom_configs_dir) to the `csgo` folder at each start of the container. [`CSGO_CUSTOM_CONFIGS_DIR`](#csgo_custom_configs_dir) is a mounted directory from the host system. The custom configs and maps directory must have the same folder structure as the `csgo` folder in order to add or overwrite the files at the paths.
 
 #### Example
 
