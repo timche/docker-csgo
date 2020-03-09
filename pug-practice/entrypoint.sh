@@ -97,7 +97,7 @@ startServer() {
   fi
 
   if [ -n "$CSGO_HOSTNAME" ]; then
-    optionalParameters+=" +hostname '$CSGO_HOSTNAME'"
+    optionalParameters+=" +hostname "'"'"$CSGO_HOSTNAME"'"'
   fi
 
   if [ -n "$CSGO_WS_API_KEY" ]; then
