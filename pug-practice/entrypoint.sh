@@ -19,26 +19,26 @@ CSGO_DIR=$SERVER_DIR/csgo
 CSGO_CUSTOM_CONFIGS_DIR="${CSGO_CUSTOM_CONFIGS_DIR-/var/csgo}"
 
 installMod() {
-    echo "> Installing/Updating mod from $1 ..."
-    cd $CSGO_DIR
-    wget -qO- $1 | tar zxf -
-    echo '> Done'
+  echo "> Installing/Updating mod from $1 ..."
+  cd $CSGO_DIR
+  wget -qO- $1 | tar zxf -
+  echo '> Done'
 }
 
 installPlugin() {
-    echo "> Installing/Updating plugin from $1 ..."
-    cd $CSGO_DIR
-    wget -q -O plugin.zip $1
-    unzip -qn plugin.zip
-    rm plugin.zip
-    echo '> Done'
+  echo "> Installing/Updating plugin from $1 ..."
+  cd $CSGO_DIR
+  wget -q -O plugin.zip $1
+  unzip -qn plugin.zip
+  rm plugin.zip
+  echo '> Done'
 }
 
 managePlugins() {
-    echo "> Managing plugins ..."
-    cd $CSGO_DIR/addons/sourcemod/plugins
-    mv !(admin-flatfile.smx|botmimic.smx|csutils.smx|practicemode.smx|pugsetup.smx|pugsetup_damageprint.smx|pugsetup_teamlocker.smx|disabled) disabled
-    echo '> Done'
+  echo "> Managing plugins ..."
+  cd $CSGO_DIR/addons/sourcemod/plugins
+  mv !(admin-flatfile.smx|botmimic.smx|csutils.smx|practicemode.smx|pugsetup.smx|pugsetup_damageprint.smx|pugsetup_teamlocker.smx|disabled) disabled
+  echo '> Done'
 }
 
 installServer() {
@@ -68,11 +68,11 @@ applyCustomConfigs() {
   echo "> Checking for custom configs at \"$CSGO_CUSTOM_CONFIGS_DIR\" ..."
 
   if [ -d "$CSGO_CUSTOM_CONFIGS_DIR" ]; then
-      echo '> Found custom configs, applying ...'
-      rsync -rti $CSGO_CUSTOM_CONFIGS_DIR/ $CSGO_DIR
-      echo '> Done'
+    echo '> Found custom configs, applying ...'
+    rsync -rti $CSGO_CUSTOM_CONFIGS_DIR/ $CSGO_DIR
+    echo '> Done'
   else
-      echo '> No custom configs found to apply'
+    echo '> No custom configs found to apply'
   fi
 }
 
@@ -104,22 +104,22 @@ startServer() {
     optionalParameters+=" -authkey $CSGO_WS_API_KEY"
   fi
 
-  $SERVER_DIR/srcds_run \
-      -game csgo \
-      -console \
-      -norestart \
-      -usercon \
-      -nobreakpad \
-      +ip "${CSGO_IP-0.0.0.0}" \
-      -port "${CSGO_PORT-27015}" \
-      -tickrate "${CSGO_TICKRATE-128}" \
-      -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
-      +game_type "${CSGO_GAME_TYPE-0}" \
-      +game_mode "${CSGO_GAME_MODE-1}" \
-      +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
-      +map "${CSGO_MAP-de_dust2}" \
-      $optionalParameters \
-      $CSGO_PARAMS
+  exec $SERVER_DIR/srcds_run \
+    -game csgo \
+    -console \
+    -norestart \
+    -usercon \
+    -nobreakpad \
+    +ip "${CSGO_IP-0.0.0.0}" \
+    -port "${CSGO_PORT-27015}" \
+    -tickrate "${CSGO_TICKRATE-128}" \
+    -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
+    +game_type "${CSGO_GAME_TYPE-0}" \
+    +game_mode "${CSGO_GAME_MODE-1}" \
+    +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
+    +map "${CSGO_MAP-de_dust2}" \
+    $optionalParameters \
+    $CSGO_PARAMS
 }
 
 updateServer() {

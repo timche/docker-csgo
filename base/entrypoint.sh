@@ -31,11 +31,11 @@ applyCustomConfigs() {
   echo "> Checking for custom configs at \"$CSGO_CUSTOM_CONFIGS_DIR\" ..."
 
   if [ -d "$CSGO_CUSTOM_CONFIGS_DIR" ]; then
-      echo '> Found custom configs, applying ...'
-      rsync -rti $CSGO_CUSTOM_CONFIGS_DIR/ $CSGO_DIR
-      echo '> Done'
+    echo '> Found custom configs, applying ...'
+    rsync -rti $CSGO_CUSTOM_CONFIGS_DIR/ $CSGO_DIR
+    echo '> Done'
   else
-      echo '> No custom configs found to apply'
+    echo '> No custom configs found to apply'
   fi
 }
 
@@ -67,22 +67,22 @@ startServer() {
     optionalParameters+=" -authkey $CSGO_WS_API_KEY"
   fi
 
-  $SERVER_DIR/srcds_run \
-      -game csgo \
-      -console \
-      -norestart \
-      -usercon \
-      -nobreakpad \
-      +ip "${CSGO_IP-0.0.0.0}" \
-      -port "${CSGO_PORT-27015}" \
-      -tickrate "${CSGO_TICKRATE-128}" \
-      -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
-      +game_type "${CSGO_GAME_TYPE-0}" \
-      +game_mode "${CSGO_GAME_MODE-1}" \
-      +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
-      +map "${CSGO_MAP-de_dust2}" \
-      $optionalParameters \
-      $CSGO_PARAMS
+  exec $SERVER_DIR/srcds_run \
+    -game csgo \
+    -console \
+    -norestart \
+    -usercon \
+    -nobreakpad \
+    +ip "${CSGO_IP-0.0.0.0}" \
+    -port "${CSGO_PORT-27015}" \
+    -tickrate "${CSGO_TICKRATE-128}" \
+    -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
+    +game_type "${CSGO_GAME_TYPE-0}" \
+    +game_mode "${CSGO_GAME_MODE-1}" \
+    +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
+    +map "${CSGO_MAP-de_dust2}" \
+    $optionalParameters \
+    $CSGO_PARAMS
 }
 
 updateServer() {
