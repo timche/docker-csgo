@@ -5,10 +5,10 @@
     <img alt="GitHub CI" src="https://github.com/timche/docker-csgo-updater/workflows/ci/badge.svg" />
   </a>
   <a href="https://hub.docker.com/r/timche/csgo">
-    <img alt="Docker Image Version (latest semver)" src="https://img.shields.io/docker/v/timche/csgo" />
+    <img alt="Docker Image Version" src="https://img.shields.io/docker/v/timche/csgo/latest">
   </a>
   <a href="https://hub.docker.com/r/timche/csgo">
-    <img alt="Docker Image Size (latest semver)" src="https://img.shields.io/docker/image-size/timche/csgo" />
+    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/timche/csgo/latest">
   </a>
   <a href="https://hub.docker.com/r/timche/csgo">
     <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/timche/csgo" />
