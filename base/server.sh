@@ -1,0 +1,125 @@
+#!/bin/bash
+
+set -e
+
+shopt -s extglob
+
+steam_dir="${HOME}/Steam"
+server_dir="${HOME}/server"
+server_installed_lock_file="${server_dir}/installed.lock"
+csgo_dir="${server_dir}/csgo"
+csgo_custom_files_dir="${CSGO_CUSTOM_FILES_DIR-"/usr/csgo"}"
+
+install() {
+  echo '> Installing server ...'
+
+  set -x
+
+  $steam_dir/steamcmd.sh \
+    +login anonymous \
+    +force_install_dir $server_dir \
+    +app_update 740 validate \
+    +quit
+
+  set +x
+
+  echo '> Done'
+
+  touch $server_installed_lock_file
+}
+
+sync_custom_files() {
+  echo "> Checking for custom files at \"$csgo_custom_files_dir\" ..."
+
+  if [ -d "$csgo_custom_files_dir" ]; then
+    echo '> Found custom files, applying ...'
+
+    set -x
+
+    rsync -rti $csgo_custom_files_dir/ $csgo_dir
+
+    set +x
+
+    echo '> Done'
+  else
+    echo '> No custom files found'
+  fi
+}
+
+start() {
+  echo '> Starting server ...'
+
+  additionalParams=""
+
+  if [ -n "$CSGO_GSLT" ]; then
+    additionalParams+=" +sv_setsteamaccount $CSGO_GSLT"
+  else
+    echo '> Warning: Environment variable "CSGO_GSLT" is not set, but is required to run the server on the internet. Running the server in LAN mode instead.'
+    additionalParams+=" +sv_lan 1"
+  fi
+
+  if [ -n "$CSGO_PW" ]; then
+    additionalParams+=" +sv_password $CSGO_PW"
+  fi
+
+  if [ -n "$CSGO_HOSTNAME" ]; then
+    additionalParams+=" +hostname $CSGO_HOSTNAME"
+    additionalParams+=
+  fi
+
+  if [ -n "$CSGO_WS_API_KEY" ]; then
+    additionalParams+=" -authkey $CSGO_WS_API_KEY"
+  fi
+
+  set -x
+
+  exec $server_dir/srcds_run \
+    -game csgo \
+    -console \
+    -norestart \
+    -usercon \
+    -nobreakpad \
+    +ip "${CSGO_IP-0.0.0.0}" \
+    -port "${CSGO_PORT-27015}" \
+    -tickrate "${CSGO_TICKRATE-128}" \
+    -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
+    +game_type "${CSGO_GAME_TYPE-0}" \
+    +game_mode "${CSGO_GAME_MODE-1}" \
+    +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
+    +map "${CSGO_MAP-de_dust2}" \
+    +rcon_password "${CSGO_RCON_PW-changeme}" \
+    $additionalParams \
+    $CSGO_PARAMS
+}
+
+update() {
+  echo '> Checking for server update ...'
+  
+  set -x
+
+  $steam_dir/steamcmd.sh \
+    +login anonymous \
+    +force_install_dir $HOME/server \
+    +app_update 740 \
+    +quit
+
+  set +x
+
+  echo '> Done'
+}
+
+install_or_update() {
+  if [ -f "$server_installed_lock_file" ]; then
+    update
+  else
+    install
+  fi
+}
+
+if [ ! -z $1 ]; then 
+    $1
+else
+    install_or_update
+    sync_custom_files
+    start
+fi
