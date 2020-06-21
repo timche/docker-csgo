@@ -129,6 +129,7 @@ else
   $server install_or_update
   install_or_update_mods
   manage_plugins
+  $server should_add_server_configs
   $server should_disable_bots
   $server sync_custom_files
   $server start

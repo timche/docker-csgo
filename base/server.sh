@@ -46,6 +46,28 @@ sync_custom_files() {
   fi
 }
 
+should_add_server_configs() {
+  if [ "${SERVER_CONFIGS-"false"}" = "true" ]; then
+    cd $csgo_dir
+
+    version="${SERVER_CONFIGS_VERSION-"0.1.0"}"
+    server_configs_url="https://github.com/timche/csgo-server-configs/releases/download/v${version}/csgo-server-configs-v${version}.zip"
+
+    if [ ! -f "server_configs" ]; then
+      touch "server_configs"
+    fi
+
+    installed=$(<server_configs)
+
+    if [ "${installed}" != "${server_configs_url}" ]; then
+      wget -q -O server_configs.zip $server_configs_url
+      unzip -qo server_configs.zip
+      rm server_configs.zip
+      echo $server_configs_url > "server_configs"
+    fi
+  fi
+}
+
 should_disable_bots() {
   cd $csgo_dir
 

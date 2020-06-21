@@ -185,6 +185,18 @@ Default: `/usr/csgo`
 
 Absolute path to a directory in the container containing custom server files. Changing this is not recommended in order to follow the documentation. See more at "[Populating with Own Server Files](#populating-with-own-server-files)".
 
+### `SERVER_CONFIGS`
+
+Default: `false`
+
+Add server configs for competitive 5v5, knife round, aim map and FFA deathmatch from [csgo-server-configs](https://github.com/timche/csgo-server-configs). Can be enabled with `true`.
+
+### `SERVER_CONFIGS_VERSION`
+
+Default: `0.1.0`
+
+[csgo-server-configs version](https://github.com/timche/csgo-server-configs/releases). Changing this will update/downgrade it on container start. Only works with `SERVER_CONFIGS` set to `true`.
+
 ### `METAMOD_VERSION`
 
 > _`sourcemod`, `pug-practice` image only._
