@@ -315,6 +315,14 @@ Default: `false`
 
 Enable [`pugsetup_teamnames`](https://github.com/splewis/csgo-pug-setup#pugsetup_teamnames) plugin. Only works with `PUG_PRACTICE_MINIMAL_PLUGINS` set to `true`.
 
+### `PUGSETUP_CVARS`
+
+> _`pug-practice` image only._
+
+Default: None
+
+List of comma-separated PugSetup configurations (e.g. `sm_pugsetup_autosetup=1,sm_pugsetup_quick_restarts=1`) that are set in `cfg/sourcemod/pugsetup.cfg`. Changes are applied on container start, but not on initial container start as `pugsetup.cfg` must be auto-generated first by the server.
+
 ## Populating with Own Server Files
 
 The server can be populated with your own custom server files (e.g. configs and maps) through a mounted directory that has the same folder structure as the server `csgo` folder in order to add or overwrite the files at their respective paths. The directory must be mounted at [`CSGO_CUSTOM_FILES_DIR`](#csgo_custom_files_dir) (default: `/usr/csgo`) and will be synced with the server `csgo` folder at each start of the container.
