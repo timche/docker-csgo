@@ -123,12 +123,26 @@ manage_plugins() {
   echo '> Done'
 }
 
+manage_admins() {
+  if [ -n "${SOURCEMOD_ADMINS}" ]; then
+    admins_simple="${csgo_dir}/addons/sourcemod/configs/admins_simple.ini"
+
+    rm $admins_simple
+    touch $admins_simple
+
+    for steamid in $(echo $SOURCEMOD_ADMINS | sed "s/,/ /g"); do
+      echo "\"$steamid\" \"z\"" >> $admins_simple
+    done
+  fi
+}
+
 if [ ! -z $1 ]; then 
   $1
 else
   $server install_or_update
   install_or_update_mods
   manage_plugins
+  manage_admins
   $server should_add_server_configs
   $server should_disable_bots
   $server sync_custom_files

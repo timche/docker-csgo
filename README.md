@@ -245,6 +245,12 @@ Default: None
 
 List of comma-separated SourceMod plugins (e.g. `mapchooser,randomcycle,rockthevote`) that are enabled. `*` enables all plugins. The plugins are moved out of the `disabled` folder into `plugins` on container start. This is running after `SOURCEMOD_PLUGINS_DISABLED`.
 
+### `SOURCEMOD_ADMINS`
+
+> _`sourcemod`, `pug-practice` image only._
+
+List of comma-separated Steam IDs that are SourceMod admins (e.g. `STEAM_0:0:123,STEAM_0:1:234`) with [`z` flag](<https://wiki.alliedmods.net/Adding_Admins_(SourceMod)>).
+
 ### `PUGSETUP_VERSION`
 
 > _`pug-practice` image only._
