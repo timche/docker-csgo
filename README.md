@@ -39,15 +39,15 @@ Each variant refers to a tag, e.g. `timche/csgo:<tag>`.
 
 #### [`latest`](https://github.com/timche/docker-csgo/blob/master/base/Dockerfile) / [`<version>`](https://github.com/timche/docker-csgo/blob/master/base/Dockerfile)
 
-CS:GO server without any modifications or add-ons.
+Vanilla CS:GO server.
 
 #### [`sourcemod`](https://github.com/timche/docker-csgo/blob/master/sourcemod/Dockerfile) / [`<version>-sourcemod`](https://github.com/timche/docker-csgo/blob/master/sourcemod/Dockerfile)
 
-CS:GO server with [Metamod:Source](https://www.sourcemm.net) and [SourceMod](https://www.sourcemod.net/).
+Vanilla CS:GO server with untouched [Metamod:Source](https://www.sourcemm.net) and [SourceMod](https://www.sourcemod.net/).
 
 #### [`pug-practice`](https://github.com/timche/docker-csgo/blob/master/pug-practice/Dockerfile) / [`<version>-pug-practice`](https://github.com/timche/docker-csgo/blob/master/pug-practice/Dockerfile)
 
-CS:GO server with [Metamod:Source](https://www.sourcemm.net), [SourceMod](https://www.sourcemod.net/), [PugSetup](https://github.com/splewis/csgo-pug-setup) and [PracticeMode](https://github.com/splewis/csgo-practice-mode) (by [splewis](https://github.com/splewis)).
+Vanilla CS:GO server with untouched [Metamod:Source](https://www.sourcemm.net), [SourceMod](https://www.sourcemod.net/), [PugSetup](https://github.com/splewis/csgo-pug-setup) and [PracticeMode](https://github.com/splewis/csgo-practice-mode) (by [splewis](https://github.com/splewis)).
 
 ## Environment Variables
 
@@ -61,11 +61,15 @@ Your Game Server Login Token (GSLT) if you want to run the server on the interne
 - [What is GSLT?](https://docs.linuxgsm.com/steamcmd/gslt#what-is-gslt)
 - [FAQ](https://docs.linuxgsm.com/steamcmd/gslt#faq)
 
+Sets `+sv_setsteamaccount` in `srcds_run` parameters.
+
 ### `CSGO_WS_API_KEY`
 
 Default: None
 
 Your [Steam Web API Key](https://steamcommunity.com/dev/apikey) to download workshop maps.
+
+Sets `-authkey` in `srcds_run` parameters.
 
 ### `CSGO_IP`
 
@@ -73,11 +77,15 @@ Default: `0.0.0.0`
 
 Internet IP the server is accessible from. In most cases the default value is sufficient, but if you want to run a [GOTV server](https://developer.valvesoftware.com/wiki/SourceTV) or have issues connecting to the server, setting the IP can help.
 
+Sets `+ip` in `srcds_run` parameters.
+
 ### `CSGO_PORT`
 
 Default: `27015`
 
 Port the server is listening to.
+
+Sets `-port` in `srcds_run` parameters.
 
 ### `CSGO_MAP`
 
@@ -85,11 +93,15 @@ Default: `de_dust2`
 
 Start the server with a specific map.
 
+Sets `+map` in `srcds_run` parameters.
+
 ### `CSGO_MAX_PLAYERS`
 
 Default: `16`
 
 Maximum players allowed to join the server.
+
+Sets `-maxplayers_override` in `srcds_run` parameters.
 
 ### `CSGO_HOSTNAME`
 
@@ -97,11 +109,15 @@ Default: `Counter-Strike: Global Offensive`
 
 The server name. [It can't contain spaces](https://developer.valvesoftware.com/wiki/Command_Line_Options#Some_useful_console_variables_2), so if you need a server name with spaces, set `hostname` in a config instead, e.g. `server.cfg`.
 
+Sets `+hostname` in `srcds_run` parameters.
+
 ### `CSGO_RCON_PW`
 
 Default: `changeme`
 
 RCON password to administrate the server.
+
+Sets `+rcon_password` in `srcds_run` parameters.
 
 ### `CSGO_PW`
 
@@ -109,11 +125,15 @@ Default: None
 
 Password to join the server.
 
+Sets `+sv_password` in `srcds_run` parameters.
+
 ### `CSGO_TICKRATE`
 
 Default: `128`
 
 Server tick rate which can be `64` or `128`. The default value gives the best game experience, but also requires most server hardware resources.
+
+Sets `-tickrate` in `srcds_run` parameters.
 
 ### `CSGO_GAME_TYPE`
 
@@ -121,11 +141,15 @@ Default: `0` (Competitive)
 
 [Game type](https://developer.valvesoftware.com/wiki/CSGO_Game_Mode_Commands).
 
+Sets `+game_type` in `srcds_run` parameters.
+
 ### `CSGO_GAME_MODE`
 
 Default: `1`
 
 [Game mode](https://developer.valvesoftware.com/wiki/CSGO_Game_Mode_Commands).
+
+Sets `+game_mode` in `srcds_run` parameters.
 
 ### `CSGO_MAP_GROUP`
 
@@ -133,11 +157,19 @@ Default: `mg_active`
 
 Map group.
 
+Sets `+mapgroup` in `srcds_run` parameters.
+
 ### `CSGO_FORCE_NETSETTINGS`
 
 Default: `false`
 
 Force client netsettings to highest `rate` (`786432`), `cmdrate` (`128`) and `updaterate` (`128`). This ensures optimal gameplay experience. Requires 128 [tick rate](#csgo_tickrate).
+
+Sets `+sv_minrate`, `+sv_mincmdrate` and `+sv_minupdaterate` in `srcds` parameters.
+
+### `CSGO_PARAMS`
+
+Additional `srcds_run` [parameters](https://developer.valvesoftware.com/wiki/Command_Line_Options#Command-line_parameters).
 
 ### `CSGO_DISABLE_BOTS`
 
@@ -152,10 +184,6 @@ This is not setting `bot_quota` to `0`, because it's buggy and still spawns bots
 Default: `/usr/csgo`
 
 Absolute path to a directory in the container containing custom server files. Changing this is not recommended in order to follow the documentation. See more at "[Populating with Own Server Files](#populating-with-own-server-files)".
-
-### `CSGO_PARAMS`
-
-Additional `srcds_run` [parameters](https://developer.valvesoftware.com/wiki/Command_Line_Options#Command-line_parameters).
 
 ### `METAMOD_VERSION`
 
