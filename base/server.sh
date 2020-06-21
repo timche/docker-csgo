@@ -46,6 +46,24 @@ sync_custom_files() {
   fi
 }
 
+should_disable_bots() {
+  cd $csgo_dir
+
+  if [ "${CSGO_DISABLE_BOTS-"false"}" = "true" ]; then
+    if [ -f "botchatter.db" ]; then
+      rm "botchatter.db"
+    fi
+
+    if [ -f "botprofilecoop.db" ]; then
+      rm "botprofilecoop.db"
+    fi
+
+    if [ -f "botprofile.db" ]; then
+      rm "botprofile.db"
+    fi
+  fi
+}
+
 start() {
   echo '> Starting server ...'
 
@@ -124,6 +142,8 @@ if [ ! -z $1 ]; then
     $1
 else
     install_or_update
+    should_add_server_configs
+    should_disable_bots
     sync_custom_files
     start
 fi

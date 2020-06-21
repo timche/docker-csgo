@@ -56,6 +56,7 @@ else
   $server_sourcemod install_or_update_mods
   install_or_update_plugins
   manage_plugins
+  $server should_disable_bots
   $server sync_custom_files
   $server start
 fi

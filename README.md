@@ -139,6 +139,14 @@ Default: `false`
 
 Force client netsettings to highest `rate` (`786432`), `cmdrate` (`128`) and `updaterate` (`128`). This ensures optimal gameplay experience. Requires 128 [tick rate](#csgo_tickrate).
 
+### `CSGO_DISABLE_BOTS`
+
+Default: `false`
+
+Disable bots completely. Can be enabled with `true`.
+
+This is not setting `bot_quota` to `0`, because it's buggy and still spawns bots when players are for example disconnecting or switching sides. This is also not setting `-nobots` parameter, because it's also buggy and causes radar bugs with smokes. This simply removes bot profile files, so the server can't spawn any bots as it can't find an appropriate difficulty profile. It just works™. Bots in PracticeMode still work though.
+
 ### `CSGO_CUSTOM_FILES_DIR`
 
 Default: `/usr/csgo`
