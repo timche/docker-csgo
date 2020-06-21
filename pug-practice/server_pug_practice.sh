@@ -48,6 +48,21 @@ set_cvars() {
   fi
 }
 
+set_damageprint_cvars() {
+  if [ -n "${PUGSETUP_DAMAGEPRINT_CVARS}" ]; then
+    pugsetup_damageprint_cfg="${csgo_dir}/cfg/sourcemod/pugsetup/pugsetup_damageprint.cfg"
+
+    if [ -f "${pugsetup_damageprint_cfg}" ]; then
+      for cvar_value in $(echo $PUGSETUP_DAMAGEPRINT_CVARS | sed "s/,/ /g"); do
+        cvar=$(echo $cvar_value | cut -f1 -d=)
+        value=$(echo $cvar_value | cut -f2 -d=)
+
+        sed -i "s/${cvar} \"[^\]*\"/${cvar} \"${value}\"/g" $pugsetup_damageprint_cfg
+      done
+    fi
+  fi
+}
+
 if [ ! -z $1 ]; then 
   $1
 else
@@ -59,6 +74,7 @@ else
   $server should_add_server_configs
   $server should_disable_bots
   set_cvars
+  set_damageprint_cvars
   $server sync_custom_files
   $server start
 fi
