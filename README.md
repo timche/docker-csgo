@@ -283,38 +283,6 @@ Disables all SourceMod plugins and enables only minimal required plugins for opt
 
 Can be enabled with `true`. Additional plugins can be enabled with [`SOURCEMOD_PLUGINS_ENABLED`](#sourcemod_plugins_enabled).
 
-### `PUGSETUP_AUTOKICKER`
-
-> _`pug-practice` image only._
-
-Default: `false`
-
-Enable [`pugsetup_autokicker`](https://github.com/splewis/csgo-pug-setup#pugsetup_autokicker) plugin. Only works with `PUG_PRACTICE_MINIMAL_PLUGINS` set to `true`.
-
-### `PUGSETUP_TEAMLOCKER`
-
-> _`pug-practice` image only._
-
-Default: `false`
-
-Enable [`pugsetup_teamlocker`](https://github.com/splewis/csgo-pug-setup#pugsetup_teamlocker) plugin. Only works with `PUG_PRACTICE_MINIMAL_PLUGINS` set to `true`.
-
-### `PUGSETUP_DAMAGEPRINT`
-
-> _`pug-practice` image only._
-
-Default: `false`
-
-Enable [`pugsetup_damageprint`](https://github.com/splewis/csgo-pug-setup#pugsetup_damageprint) plugin. Only works with `PUG_PRACTICE_MINIMAL_PLUGINS` set to `true`.
-
-### `PUGSETUP_TEAMNAMES`
-
-> _`pug-practice` image only._
-
-Default: `false`
-
-Enable [`pugsetup_teamnames`](https://github.com/splewis/csgo-pug-setup#pugsetup_teamnames) plugin. Only works with `PUG_PRACTICE_MINIMAL_PLUGINS` set to `true`.
-
 ### `PUGSETUP_CVARS`
 
 > _`pug-practice` image only._

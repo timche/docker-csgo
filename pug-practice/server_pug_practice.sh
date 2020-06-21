@@ -23,22 +23,6 @@ manage_plugins() {
   if [ "${PUG_PRACTICE_MINIMAL_PLUGINS-"false"}" = "true" ]; then
     enabledPlugins="admin-flatfile,botmimic,csutils,practicemode,pugsetup"
 
-    if [ "${PUGSETUP_AUTOKICKER-"false"}" = "true" ]; then
-      enabledPlugins+=",pugsetup_autokicker"
-    fi
-
-    if [ "${PUGSETUP_TEAMLOCKER-"false"}" = "true" ]; then
-      enabledPlugins+=",pugsetup_teamlocker"
-    fi
-
-    if [ "${PUGSETUP_DAMAGEPRINT-"false"}" = "true" ]; then
-      enabledPlugins+=",pugsetup_damageprint"
-    fi
-
-    if [ "${PUGSETUP_TEAMNAMES-"false"}" = "true" ]; then
-      enabledPlugins+=",pugsetup_teamnames"
-    fi
-
     if [ -n "${SOURCEMOD_PLUGINS_ENABLED}" ]; then
       enabledPlugins+=",${SOURCEMOD_PLUGINS_ENABLED}"
     fi
