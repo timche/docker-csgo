@@ -133,6 +133,12 @@ Default: `mg_active`
 
 Map group.
 
+### `CSGO_FORCE_NETSETTINGS`
+
+Default: `false`
+
+Force client netsettings to highest `rate` (`786432`), `cmdrate` (`128`) and `updaterate` (`128`). This ensures optimal gameplay experience. Requires 128 [tick rate](#csgo_tickrate).
+
 ### `CSGO_CUSTOM_FILES_DIR`
 
 Default: `/usr/csgo`

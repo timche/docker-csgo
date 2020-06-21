@@ -71,6 +71,10 @@ start() {
     additionalParams+=" -authkey $CSGO_WS_API_KEY"
   fi
 
+  if [ "${CSGO_FORCE_NETSETTINGS-"false"}" = "true" ]; then
+    additionalParams+=" +sv_minrate 786432 +sv_mincmdrate 128 +sv_minupdaterate 128"
+  fi
+
   set -x
 
   exec $server_dir/srcds_run \
