@@ -51,7 +51,7 @@ Vanilla CS:GO server with untouched [Metamod:Source](https://www.sourcemm.net), 
 
 ## Environment Variables
 
-### `CSGO_GSLT`
+#### `CSGO_GSLT`
 
 Default: None
 
@@ -63,7 +63,7 @@ Your Game Server Login Token (GSLT) if you want to run the server on the interne
 
 Sets `+sv_setsteamaccount` in `srcds_run` parameters.
 
-### `CSGO_WS_API_KEY`
+#### `CSGO_WS_API_KEY`
 
 Default: None
 
@@ -71,7 +71,7 @@ Your [Steam Web API Key](https://steamcommunity.com/dev/apikey) to download work
 
 Sets `-authkey` in `srcds_run` parameters.
 
-### `CSGO_IP`
+#### `CSGO_IP`
 
 Default: `0.0.0.0`
 
@@ -79,7 +79,7 @@ Internet IP the server is accessible from. In most cases the default value is su
 
 Sets `+ip` in `srcds_run` parameters.
 
-### `CSGO_PORT`
+#### `CSGO_PORT`
 
 Default: `27015`
 
@@ -87,7 +87,7 @@ Port the server is listening to.
 
 Sets `-port` in `srcds_run` parameters.
 
-### `CSGO_MAP`
+#### `CSGO_MAP`
 
 Default: `de_dust2`
 
@@ -95,7 +95,7 @@ Start the server with a specific map.
 
 Sets `+map` in `srcds_run` parameters.
 
-### `CSGO_MAX_PLAYERS`
+#### `CSGO_MAX_PLAYERS`
 
 Default: `16`
 
@@ -103,7 +103,7 @@ Maximum players allowed to join the server.
 
 Sets `-maxplayers_override` in `srcds_run` parameters.
 
-### `CSGO_HOSTNAME`
+#### `CSGO_HOSTNAME`
 
 Default: `Counter-Strike: Global Offensive`
 
@@ -111,7 +111,7 @@ The server name. [It can't contain spaces](https://developer.valvesoftware.com/w
 
 Sets `+hostname` in `srcds_run` parameters.
 
-### `CSGO_RCON_PW`
+#### `CSGO_RCON_PW`
 
 Default: `changeme`
 
@@ -119,7 +119,7 @@ RCON password to administrate the server.
 
 Sets `+rcon_password` in `srcds_run` parameters.
 
-### `CSGO_PW`
+#### `CSGO_PW`
 
 Default: None
 
@@ -127,7 +127,7 @@ Password to join the server.
 
 Sets `+sv_password` in `srcds_run` parameters.
 
-### `CSGO_TICKRATE`
+#### `CSGO_TICKRATE`
 
 Default: `128`
 
@@ -135,7 +135,7 @@ Server tick rate which can be `64` or `128`. The default value gives the best ga
 
 Sets `-tickrate` in `srcds_run` parameters.
 
-### `CSGO_GAME_TYPE`
+#### `CSGO_GAME_TYPE`
 
 Default: `0` (Competitive)
 
@@ -143,7 +143,7 @@ Default: `0` (Competitive)
 
 Sets `+game_type` in `srcds_run` parameters.
 
-### `CSGO_GAME_MODE`
+#### `CSGO_GAME_MODE`
 
 Default: `1`
 
@@ -151,7 +151,7 @@ Default: `1`
 
 Sets `+game_mode` in `srcds_run` parameters.
 
-### `CSGO_MAP_GROUP`
+#### `CSGO_MAP_GROUP`
 
 Default: `mg_active`
 
@@ -159,7 +159,7 @@ Map group.
 
 Sets `+mapgroup` in `srcds_run` parameters.
 
-### `CSGO_FORCE_NETSETTINGS`
+#### `CSGO_FORCE_NETSETTINGS`
 
 Default: `false`
 
@@ -167,11 +167,11 @@ Force client netsettings to highest `rate` (`786432`), `cmdrate` (`128`) and `up
 
 Sets `+sv_minrate`, `+sv_mincmdrate` and `+sv_minupdaterate` in `srcds` parameters.
 
-### `CSGO_PARAMS`
+#### `CSGO_PARAMS`
 
 Additional `srcds_run` [parameters](https://developer.valvesoftware.com/wiki/Command_Line_Options#Command-line_parameters).
 
-### `CSGO_DISABLE_BOTS`
+#### `CSGO_DISABLE_BOTS`
 
 Default: `false`
 
@@ -179,25 +179,25 @@ Disable bots completely. Can be enabled with `true`.
 
 This is not setting `bot_quota` to `0`, because it's buggy and still spawns bots when players are for example disconnecting or switching sides. This is also not setting `-nobots` parameter, because it's also buggy and causes radar bugs with smokes. This simply removes bot profile files, so the server can't spawn any bots as it can't find an appropriate difficulty profile. It just works™. Bots in PracticeMode still work though.
 
-### `CSGO_CUSTOM_FILES_DIR`
+#### `CSGO_CUSTOM_FILES_DIR`
 
 Default: `/usr/csgo`
 
 Absolute path to a directory in the container containing custom server files. Changing this is not recommended in order to follow the documentation. See more at "[Populating with Own Server Files](#populating-with-own-server-files)".
 
-### `SERVER_CONFIGS`
+#### `SERVER_CONFIGS`
 
 Default: `false`
 
 Add server configs for competitive 5v5, knife round, aim map and FFA deathmatch from [csgo-server-configs](https://github.com/timche/csgo-server-configs). Can be enabled with `true`.
 
-### `SERVER_CONFIGS_VERSION`
+#### `SERVER_CONFIGS_VERSION`
 
 Default: `0.1.0`
 
 [csgo-server-configs version](https://github.com/timche/csgo-server-configs/releases). Changing this will update/downgrade it on container start. Only works with `SERVER_CONFIGS` set to `true`.
 
-### `METAMOD_VERSION`
+#### `METAMOD_VERSION`
 
 > _`sourcemod`, `pug-practice` image only._
 
@@ -205,7 +205,7 @@ Default: `1.10.7`
 
 [Metamod:Source version](https://www.sourcemm.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start.
 
-### `METAMOD_BUILD`
+#### `METAMOD_BUILD`
 
 > _`sourcemod`, `pug-practice` image only._
 
@@ -213,7 +213,7 @@ Default: `971`
 
 [Metamod:Source build number](https://www.sourcemm.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start. Build number must exist at version.
 
-### `SOURCEMOD_VERSION`
+#### `SOURCEMOD_VERSION`
 
 > _`sourcemod`, `pug-practice` image only._
 
@@ -221,7 +221,7 @@ Default: `1.10.0`
 
 [SourceMod version](https://www.sourcemod.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start.
 
-### `SOURCEMOD_BUILD`
+#### `SOURCEMOD_BUILD`
 
 > _`sourcemod`, `pug-practice` image only._
 
@@ -229,7 +229,7 @@ Default: `6488`
 
 [SourceMod build number](https://www.sourcemod.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start. Build number must exist at version.
 
-### `SOURCEMOD_PLUGINS_DISABLED`
+#### `SOURCEMOD_PLUGINS_DISABLED`
 
 > _`sourcemod`, `pug-practice` image only._
 
@@ -237,7 +237,7 @@ Default: None
 
 List of comma-separated SourceMod plugins (e.g. `nextmap,reservedslots,sounds`) that are disabled. `*` disables all plugins. The plugins are moved into the `disabled` folder on container start. This is running before `SOURCEMOD_PLUGINS_ENABLED`.
 
-### `SOURCEMOD_PLUGINS_ENABLED`
+#### `SOURCEMOD_PLUGINS_ENABLED`
 
 > _`sourcemod`, `pug-practice` image only._
 
@@ -245,13 +245,13 @@ Default: None
 
 List of comma-separated SourceMod plugins (e.g. `mapchooser,randomcycle,rockthevote`) that are enabled. `*` enables all plugins. The plugins are moved out of the `disabled` folder into `plugins` on container start. This is running after `SOURCEMOD_PLUGINS_DISABLED`.
 
-### `SOURCEMOD_ADMINS`
+#### `SOURCEMOD_ADMINS`
 
 > _`sourcemod`, `pug-practice` image only._
 
 List of comma-separated Steam IDs that are SourceMod admins (e.g. `STEAM_0:0:123,STEAM_0:1:234`) with [`z` flag](<https://wiki.alliedmods.net/Adding_Admins_(SourceMod)>).
 
-### `PUGSETUP_VERSION`
+#### `PUGSETUP_VERSION`
 
 > _`pug-practice` image only._
 
@@ -259,7 +259,7 @@ Default: `2.0.5`
 
 [PugSetup version](https://github.com/splewis/csgo-pug-setup/releases) running on the server. Changing this will update/downgrade it on container start.
 
-### `PRACTICEMODE_VERSION`
+#### `PRACTICEMODE_VERSION`
 
 > _`pug-practice` image only._
 
@@ -267,7 +267,7 @@ Default: `1.3.3`
 
 [PracticeMode version](https://github.com/splewis/csgo-practice-mode/releases) running on the server. Changing this will update/downgrade it on container start.
 
-### `PUG_PRACTICE_MINIMAL_PLUGINS`
+#### `PUG_PRACTICE_MINIMAL_PLUGINS`
 
 > _`pug-practice` image only._
 
@@ -283,7 +283,7 @@ Disables all SourceMod plugins and enables only minimal required plugins for opt
 
 Can be enabled with `true`. Additional plugins can be enabled with [`SOURCEMOD_PLUGINS_ENABLED`](#sourcemod_plugins_enabled).
 
-### `PUGSETUP_CVARS`
+#### `PUGSETUP_CVARS`
 
 > _`pug-practice` image only._
 
@@ -291,7 +291,7 @@ Default: None
 
 List of comma-separated PugSetup configurations (e.g. `sm_pugsetup_autosetup=1,sm_pugsetup_quick_restarts=1`) that are set in `cfg/sourcemod/pugsetup.cfg`. Changes are applied on container start, but not on initial container start as `pugsetup.cfg` must be auto-generated first by the server.
 
-### `PUGSETUP_DAMAGEPRINT_CVARS`
+#### `PUGSETUP_DAMAGEPRINT_CVARS`
 
 > _`pug-practice` image only._
 
