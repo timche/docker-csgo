@@ -21,27 +21,27 @@ sourcemod_url="https://sm.alliedmods.net/smdrop/${sourcemod_version}/sourcemod-$
 install_or_update_mod() {
   cd $csgo_dir
 
-  if [ -f "$1" ]; then
-    installed=$(<$1)
-
-    if [ "${installed}" != "$2" ]; then
-      echo "> Updating mod ${1} from ${2} ..."
-
-      wget -qO- $2 | tar zxf -
-
-      echo $2 >$1
-
-      echo '> Done'
-    fi
-  else
-    echo "> Installing mod ${1} from ${2} ..."
-
-    wget -qO- $2 | tar zxf -
-
-    echo $2 >$1
-
-    echo '> Done'
+  if [ ! -f "$1" ]; then
+    touch $1
   fi
+
+  installed=$(<$1)
+
+  if [ "${installed}" = "$2" ]; then
+    return
+  fi
+    
+  if [ -z "${installed}" ]; then
+    echo "> Installing mod ${1} from ${2} ..."
+  else
+    echo "> Updating mod ${1} from ${2} ..."
+  fi
+
+  wget -qO- $2 | tar zxf -
+
+  echo $2 > $1
+
+  echo '> Done'
 }
 
 install_or_update_mods() {
@@ -52,31 +52,31 @@ install_or_update_mods() {
 install_or_update_plugin() {
   cd $csgo_dir
 
-  if [ -f "${args[1]}" ]; then
-    installed=$(<${args[1]})
-
-    if [ "${installed}" != "${args[2]}" ]; then
-      echo "> Updating SourceMod plugin ${args[1]} from ${args[2]} ..."
-
-      wget -q -O plugin.zip ${args[2]}
-      unzip -qo plugin.zip
-      rm plugin.zip
-
-      echo ${args[2]} >${args[1]}
-
-      echo '> Done'
-    fi
-  else
-    echo "> Installing SourceMod plugin ${args[1]} from ${args[2]} ..."
-
-    wget -q -O plugin.zip ${args[2]}
-    unzip -qn plugin.zip
-    rm plugin.zip
-
-    echo ${args[2]} >${args[1]}
-
-    echo '> Done'
+  if [ ! -f "${args[1]}" ]; then
+    touch ${args[1]}
   fi
+
+  installed=$(<${args[1]})
+
+  if [ -z "${installed}" ]; then
+    echo "> Installing SourceMod plugin ${args[1]} from ${args[2]} ..."
+  else
+    echo "> Updating SourceMod plugin ${args[1]} from ${args[2]} ..."
+  fi
+
+  wget -q -O plugin.zip ${args[2]}
+
+  if [ -z "${installed}" ]; then
+    unzip -qn plugin.zip
+  else
+    unzip -qo plugin.zip
+  fi
+  
+  rm plugin.zip
+
+  echo ${args[2]} > ${args[1]}
+
+  echo '> Done'
 }
 
 manage_plugins() {
@@ -125,12 +125,13 @@ manage_admins() {
   if [ -n "${SOURCEMOD_ADMINS}" ]; then
     admins_simple="${csgo_dir}/addons/sourcemod/configs/admins_simple.ini"
 
-    rm $admins_simple
-    touch $admins_simple
+    if [ -f "${admins_simple}" ]; then
+      > $admins_simple
 
-    for steamid in $(echo $SOURCEMOD_ADMINS | sed "s/,/ /g"); do
-      echo "\"$steamid\" \"z\"" >>$admins_simple
-    done
+      for steamid in $(echo $SOURCEMOD_ADMINS | sed "s/,/ /g"); do
+        echo "\"$steamid\" \"z\"" >> $admins_simple
+      done
+    fi
   fi
 }
 
