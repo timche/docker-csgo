@@ -345,7 +345,7 @@ SOURCEMOD_PLUGINS_ENABLED="admin-flatfile,antiflood,reservedslots"
 
 This will disable all plugins and enable `admin-flatfile`, `antiflood` and `reservedslots`. Using `*` is useful to disable/enable all plugins without needing to specify them individually.
 
-The `pug-practice` image also offers a [`PUG_PRACTICE_MINIMAL_PLUGINS`](#pug_practice_minimal_plugins) environment variable that disables all SourceMod plugins and enables only minimal required plugins for PugSetup and PracticeMode and optimal server performance. Optionally [`PUGSETUP_AUTOKICKER`](#pugsetup_autokicker), [`PUGSETUP_TEAMLOCKER`](#pugsetup_teamlocker), [`PUGSETUP_DAMAGEPRINT`](#pugsetup_damageprint) and [`PUGSETUP_TEAMNAMES`](#pugsetup_teamnames) can be set as well to enables these additional [PugSetup plugins](https://github.com/splewis/csgo-pug-setup#addon-plugins).
+The `pug-practice` image also offers a [`PUG_PRACTICE_MINIMAL_PLUGINS`](#pug_practice_minimal_plugins) environment variable that disables all SourceMod plugins and enables only minimal required plugins for PugSetup and PracticeMode for optimal server performance.
 
 ## Updating the Server
 
