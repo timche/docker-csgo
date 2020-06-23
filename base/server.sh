@@ -50,7 +50,7 @@ should_add_server_configs() {
   if [ "${SERVER_CONFIGS-"false"}" = "true" ]; then
     cd $csgo_dir
 
-    version="${SERVER_CONFIGS_VERSION-"0.2.0"}"
+    version="${SERVER_CONFIGS_VERSION-"0.3.0"}"
     server_configs_url="https://github.com/timche/csgo-server-configs/releases/download/v${version}/csgo-server-configs-${version}.zip"
 
     if [ ! -f "server_configs" ]; then
