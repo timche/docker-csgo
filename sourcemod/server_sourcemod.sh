@@ -23,13 +23,13 @@ install_or_update_mod() {
 
   if [ -f "$1" ]; then
     installed=$(<$1)
-    
+
     if [ "${installed}" != "$2" ]; then
       echo "> Updating mod ${1} from ${2} ..."
 
       wget -qO- $2 | tar zxf -
 
-      echo $2 > $1
+      echo $2 >$1
 
       echo '> Done'
     fi
@@ -38,7 +38,7 @@ install_or_update_mod() {
 
     wget -qO- $2 | tar zxf -
 
-    echo $2 > $1
+    echo $2 >$1
 
     echo '> Done'
   fi
@@ -54,7 +54,7 @@ install_or_update_plugin() {
 
   if [ -f "${args[1]}" ]; then
     installed=$(<${args[1]})
-    
+
     if [ "${installed}" != "${args[2]}" ]; then
       echo "> Updating SourceMod plugin ${args[1]} from ${args[2]} ..."
 
@@ -62,7 +62,7 @@ install_or_update_plugin() {
       unzip -qo plugin.zip
       rm plugin.zip
 
-      echo ${args[2]} > ${args[1]}
+      echo ${args[2]} >${args[1]}
 
       echo '> Done'
     fi
@@ -73,7 +73,7 @@ install_or_update_plugin() {
     unzip -qn plugin.zip
     rm plugin.zip
 
-    echo ${args[2]} > ${args[1]}
+    echo ${args[2]} >${args[1]}
 
     echo '> Done'
   fi
@@ -92,8 +92,7 @@ manage_plugins() {
       fi
     done
   elif [ -n "${SOURCEMOD_PLUGINS_DISABLED}" ]; then
-    for plugin in $(echo $SOURCEMOD_PLUGINS_DISABLED | sed "s/,/ /g")
-    do
+    for plugin in $(echo $SOURCEMOD_PLUGINS_DISABLED | sed "s/,/ /g"); do
       if [ -f "${plugin}.smx" ]; then
         echo "> Disabling ${plugin}.smx"
         mv "${plugin}.smx" disabled
@@ -111,8 +110,7 @@ manage_plugins() {
       fi
     done
   elif [ -n "${SOURCEMOD_PLUGINS_ENABLED}" ]; then
-    for plugin in $(echo $SOURCEMOD_PLUGINS_ENABLED | sed "s/,/ /g")
-    do
+    for plugin in $(echo $SOURCEMOD_PLUGINS_ENABLED | sed "s/,/ /g"); do
       if [ -f "${plugin}.smx" ]; then
         echo "> Enabling ${plugin}.smx"
         mv "${plugin}.smx" ..
@@ -131,12 +129,12 @@ manage_admins() {
     touch $admins_simple
 
     for steamid in $(echo $SOURCEMOD_ADMINS | sed "s/,/ /g"); do
-      echo "\"$steamid\" \"z\"" >> $admins_simple
+      echo "\"$steamid\" \"z\"" >>$admins_simple
     done
   fi
 }
 
-if [ ! -z $1 ]; then 
+if [ ! -z $1 ]; then
   $1
 else
   $server install_or_update
@@ -146,5 +144,5 @@ else
   $server should_add_server_configs
   $server should_disable_bots
   $server sync_custom_files
-  $server start
+  exec $server start
 fi

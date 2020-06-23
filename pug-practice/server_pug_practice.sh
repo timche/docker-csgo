@@ -63,7 +63,7 @@ set_damageprint_cvars() {
   fi
 }
 
-if [ ! -z $1 ]; then 
+if [ ! -z $1 ]; then
   $1
 else
   $server install_or_update
@@ -76,5 +76,5 @@ else
   set_cvars
   set_damageprint_cvars
   $server sync_custom_files
-  $server start
+  exec $server start
 fi
