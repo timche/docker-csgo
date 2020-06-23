@@ -13,7 +13,8 @@ RUN apt-get update \
 
 USER csgo
 
-RUN mkdir /home/csgo/Steam
+RUN mkdir /home/csgo/Steam && \
+    mkdir /home/csgo/server
 
 WORKDIR /home/csgo/Steam
 
@@ -21,8 +22,6 @@ RUN wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.ta
     && /home/csgo/Steam/steamcmd.sh +quit
 
 WORKDIR /home/csgo
-
-RUN mkdir server
 
 COPY server.sh .
 
