@@ -50,8 +50,8 @@ should_add_server_configs() {
   if [ "${SERVER_CONFIGS-"false"}" = "true" ]; then
     cd $csgo_dir
 
-    version="${SERVER_CONFIGS_VERSION-"0.1.0"}"
-    server_configs_url="https://github.com/timche/csgo-server-configs/releases/download/v${version}/csgo-server-configs-v${version}.zip"
+    version="${SERVER_CONFIGS_VERSION-"0.2.0"}"
+    server_configs_url="https://github.com/timche/csgo-server-configs/releases/download/v${version}/csgo-server-configs-${version}.zip"
 
     if [ ! -f "server_configs" ]; then
       touch "server_configs"
@@ -63,7 +63,7 @@ should_add_server_configs() {
       wget -q -O server_configs.zip $server_configs_url
       unzip -qo server_configs.zip
       rm server_configs.zip
-      echo $server_configs_url > "server_configs"
+      echo $server_configs_url >"server_configs"
     fi
   fi
 }
@@ -138,7 +138,7 @@ start() {
 
 update() {
   echo '> Checking for server update ...'
-  
+
   set -x
 
   $steam_dir/steamcmd.sh \
@@ -160,12 +160,12 @@ install_or_update() {
   fi
 }
 
-if [ ! -z $1 ]; then 
-    $1
+if [ ! -z $1 ]; then
+  $1
 else
-    install_or_update
-    should_add_server_configs
-    should_disable_bots
-    sync_custom_files
-    start
+  install_or_update
+  should_add_server_configs
+  should_disable_bots
+  sync_custom_files
+  start
 fi
