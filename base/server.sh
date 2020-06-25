@@ -119,6 +119,32 @@ start() {
     additionalParams+=" +sv_minrate 786432 +sv_mincmdrate 128 +sv_minupdaterate 128"
   fi
 
+  if [ "${CSGO_TV_ENABLE-"false"}" = "true" ]; then
+    additionalParams+=" +tv_enable 1"
+    additionalParams+=" +tv_delaymapchange ${CSGO_TV_DELAYMAPCHANGE-1}"
+    additionalParams+=" +tv_delay ${CSGO_TV_DELAY-45}"
+    additionalParams+=" +tv_deltacache ${CSGO_TV_DELTACACHE-2}"
+    additionalParams+=" +tv_dispatchmode ${CSGO_TV_DISPATCHMODE-1}"
+    additionalParams+=" +tv_maxclients ${CSGO_TV_MAXCLIENTS-10}"
+    additionalParams+=" +tv_maxrate ${CSGO_TV_MAXRATE-0}"
+    additionalParams+=" +tv_overridemaster ${CSGO_TV_OVERRIDEMASTER-0}"
+    additionalParams+=" +tv_snapshotrate ${CSGO_TV_SNAPSHOTRATE-128}"
+    additionalParams+=" +tv_timeout ${CSGO_TV_TIMEOUT-60}"
+    additionalParams+=" +tv_transmitall ${CSGO_TV_TRANSMITALL-1}"
+
+    if [ -n "${CSGO_TV_NAME}" ]; then
+      additionalParams+=" +tv_name ${CSGO_TV_NAME}"
+    fi
+
+    if [ -n "${CSGO_TV_PORT}" ]; then
+      additionalParams+=" +tv_port ${CSGO_TV_PORT}"
+    fi
+
+    if [ -n "${CSGO_TV_PASSWORD}" ]; then
+      additionalParams+=" +tv_password ${CSGO_TV_PASSWORD}"
+    fi
+  fi
+
   set -x
 
   exec $server_dir/srcds_run \

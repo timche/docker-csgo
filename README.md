@@ -159,6 +159,82 @@ Map group.
 
 Sets `+mapgroup` in `srcds_run` parameters.
 
+#### `CSGO_TV_ENABLED`
+
+Default: `false`
+
+Enable GOTV. Can be enabled with `true`.
+
+#### `CSGO_TV_NAME`
+
+Default: `GOTV`
+
+Set GOTV name.
+
+#### `CSGO_TV_PASSWORD`
+
+Default: None
+
+Set GOTV password.
+
+#### `CSGO_TV_DELAY`
+
+Default: `45`
+
+Set GOTV broadcast delay in seconds.
+
+#### `CSGO_TV_PORT`
+
+Default: `27020`
+
+Set GOTV port.
+
+#### `CSGO_TV_DELAYMAPCHANGE`
+
+Default: `1`
+
+Delay the map change on game server until rest of buffered game has been broadcasted.
+
+#### `CSGO_TV_DELTACACHE`
+
+Default: `2`
+
+#### `CSGO_TV_DISPATCHMODE`
+
+Default: `1`
+
+#### `CSGO_TV_MAXCLIENTS`
+
+Default: `10`
+
+Maximum client number for GOTV.
+
+#### `CSGO_TV_MAXRATE`
+
+Default: `0`
+
+Maximum bandwidth spend per client in bytes/second.
+
+#### `CSGO_TV_OVERRIDEMASTER`
+
+Default: `0`
+
+#### `CSGO_TV_SNAPSHOTRATE`
+
+Default: `128`
+
+World snapshots broadcasted per second by GOTV.
+
+#### `CSGO_TV_TIMEOUT`
+
+Default: `60`
+
+#### `CSGO_TV_TRANSMITALL`
+
+Default: `1`
+
+By default entities and events outside of the auto-director view are removed from GOTV broadcasts to save bandwidth. If `tv_transmitall` is enabled, the whole game is transmitted and spectators can switch their view to any player they want. This option increases bandwidth requirement per spectator client by factor 2 to 3.
+
 #### `CSGO_FORCE_NETSETTINGS`
 
 Default: `false`
