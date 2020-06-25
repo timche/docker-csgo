@@ -315,6 +315,12 @@ Default: None
 
 List of comma-separated PugSetup configurations (e.g. `sm_pugsetup_damageprint_auto_color=1,sm_pugsetup_damageprint_format={NAME} [{HEALTH}]: {DMG_TO}/{HITS_TO}`) that are set in `cfg/sourcemod/pugsetup_damageprint.cfg`. Changes are applied on container start, but requires `pugsetup_damageprinter` plugin to be run first.
 
+#### `DEBUG`
+
+Default: `false`
+
+Print all executed commands for better debugging.
+
 ## Populating with Own Server Files
 
 The server can be populated with your own custom server files (e.g. configs and maps) through a mounted directory that has the same folder structure as the server `csgo` folder in order to add or overwrite the files at their respective paths. The directory must be mounted at [`CSGO_CUSTOM_FILES_DIR`](#csgo_custom_files_dir) (default: `/usr/csgo`) and will be synced with the server `csgo` folder at each start of the container.
