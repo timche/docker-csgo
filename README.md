@@ -159,7 +159,7 @@ Map group.
 
 Sets `+mapgroup` in `srcds_run` parameters.
 
-#### `CSGO_TV_ENABLED`
+#### `CSGO_TV_ENABLE`
 
 Default: `false`
 
