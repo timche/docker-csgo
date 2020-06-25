@@ -283,6 +283,14 @@ Disables all SourceMod plugins and enables only minimal required plugins for opt
 
 Can be enabled with `true`. Additional plugins can be enabled with [`SOURCEMOD_PLUGINS_ENABLED`](#sourcemod_plugins_enabled).
 
+#### `PUGSETUP_PERMISSIONS`
+
+> _`pug-practice` image only._
+
+Default: None
+
+List of comma-separated PugSetup permissions (e.g. `sm_10man=none,sm_setup=admin`) that are set in `addons/sourcemod/configs/pugsetup/permissions.cfg`. Changes are applied on container start.
+
 #### `PUGSETUP_SETUPOPTIONS`
 
 > _`pug-practice` image only._

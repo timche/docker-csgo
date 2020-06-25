@@ -33,6 +33,21 @@ manage_plugins() {
   fi
 }
 
+set_pugsetup_permissions() {
+  if [ -n "${PUGSETUP_PERMISSIONS}" ]; then
+    pugsetup_permissions_cfg="${csgo_dir}/addons/sourcemod/configs/pugsetup/permissions.cfg"
+
+    if [ -f "${pugsetup_permissions_cfg}" ]; then
+      for permission_value in $(echo $PUGSETUP_PERMISSIONS | sed "s/,/ /g"); do
+        permission=$(echo $permission_value | cut -f1 -d=)
+        value=$(echo $permission_value | cut -f2 -d=)
+
+        sed -i "s/\(\"${permission}\"\).*/\1 \"${value}\"/g" $pugsetup_permissions_cfg
+      done
+    fi
+  fi
+}
+
 set_pugsetup_setupoptions() {
   if [ -n "${PUGSETUP_SETUPOPTIONS}" ]; then
     pugsetup_setupoptions_cfg="${csgo_dir}/addons/sourcemod/configs/pugsetup/setupoptions.cfg"
@@ -98,6 +113,7 @@ else
   $server_sourcemod manage_admins
   $server should_add_server_configs
   $server should_disable_bots
+  set_pugsetup_permissions
   set_pugsetup_setupoptions
   set_cvars
   set_damageprint_cvars
