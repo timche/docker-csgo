@@ -58,6 +58,10 @@ install_or_update_plugin() {
 
   installed=$(<${args[1]})
 
+  if [ "${installed}" = "${args[2]}" ]; then
+    return
+  fi
+
   if [ -z "${installed}" ]; then
     echo "> Installing SourceMod plugin ${args[1]} from ${args[2]} ..."
   else
