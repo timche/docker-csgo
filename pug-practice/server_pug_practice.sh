@@ -33,6 +33,31 @@ manage_plugins() {
   fi
 }
 
+set_pugsetup_setupoptions() {
+  if [ -n "${PUGSETUP_SETUPOPTIONS}" ]; then
+    pugsetup_setupoptions_cfg="${csgo_dir}/addons/sourcemod/configs/pugsetup/setupoptions.cfg"
+
+    if [ -f "${pugsetup_setupoptions_cfg}" ]; then
+      for setting in $(echo $PUGSETUP_SETUPOPTIONS | sed "s/,/ /g"); do
+        option=$(echo $setting | cut -f1 -d=)
+        values=$(echo $setting | cut -f2 -d=)
+
+        default_value=$(echo $values | awk -F: '{print $1}')
+
+        if [ ! -z "${default_value}" ]; then
+          sed -i "/${option}/!b;n;n;c\"default\" \"${default_value}\"" $pugsetup_setupoptions_cfg
+        fi
+
+        display_setting=$(echo $values | awk -F: '{print $2}')
+
+        if [ ! -z "${display_setting}" ]; then
+          sed -i "/${option}/!b;n;n;n;c\"display_setting\" \"${display_setting}\"" $pugsetup_setupoptions_cfg
+        fi
+      done
+    fi
+  fi
+}
+
 set_cvars() {
   if [ -n "${PUGSETUP_CVARS}" ]; then
     pugsetup_cfg="${csgo_dir}/cfg/sourcemod/pugsetup/pugsetup.cfg"
@@ -73,6 +98,7 @@ else
   $server_sourcemod manage_admins
   $server should_add_server_configs
   $server should_disable_bots
+  set_pugsetup_setupoptions
   set_cvars
   set_damageprint_cvars
   $server sync_custom_files
