@@ -20,6 +20,17 @@
 
 > [Counter-Strike: Global Offensive (CS:GO) Dedicated Server](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers) with automatic/manual updates and optional [SourceMod](https://www.sourcemod.net/) and [PugSetup](https://github.com/splewis/csgo-pug-setup)/[PracticeMode](https://github.com/splewis/csgo-practice-mode) integrations
 
+## Table of Contents
+
+- [How to Use This Image](#how-to-use-this-image)
+- [Image Variants](#image-variants)
+- [Environment Variables](#environment-variables)
+- [Managing SourceMod Plugins](#managing-sourcemod-plugins)
+- [Populating with Own Server Files](#populating-with-own-server-files)
+- [Updating the Server](#updating-the-server)
+  - [Automatically (recommended)](#automatically-recommended)
+  - [Manually](#manually)
+
 ## How to Use This Image
 
 ```sh
@@ -397,6 +408,22 @@ Default: `false`
 
 Print all executed commands for better debugging.
 
+## Managing SourceMod Plugins
+
+SourceMod plugins can be managed through the environment variables [`SOURCEMOD_PLUGINS_DISABLED`](#sourcemod_plugins_disabled) and [`SOURCEMOD_PLUGINS_ENABLED`](#sourcemod_plugins_enabled) where either selected (comma-separated list) or all (`*`) plugins are disabled/enabled. Plugins are disabled first and then enabled on container start.
+
+### Example
+
+```sh
+# .env
+SOURCEMOD_PLUGINS_DISABLED="*"
+SOURCEMOD_PLUGINS_ENABLED="admin-flatfile,antiflood,reservedslots"
+```
+
+This will disable all plugins and enable `admin-flatfile`, `antiflood` and `reservedslots`. Using `*` is useful to disable/enable all plugins without needing to specify them individually.
+
+The `pug-practice` image also offers a [`PUG_PRACTICE_MINIMAL_PLUGINS`](#pug_practice_minimal_plugins) environment variable that disables all SourceMod plugins and enables only minimal required plugins for PugSetup and PracticeMode for optimal server performance.
+
 ## Populating with Own Server Files
 
 The server can be populated with your own custom server files (e.g. configs and maps) through a mounted directory that has the same folder structure as the server `csgo` folder in order to add or overwrite the files at their respective paths. The directory must be mounted at [`CSGO_CUSTOM_FILES_DIR`](#csgo_custom_files_dir) (default: `/usr/csgo`) and will be synced with the server `csgo` folder at each start of the container.
@@ -428,22 +455,6 @@ $ docker run \
   --net=host \
   timche/csgo
 ```
-
-## Managing SourceMod Plugins
-
-SourceMod plugins can be managed through the environment variables [`SOURCEMOD_PLUGINS_DISABLED`](#sourcemod_plugins_disabled) and [`SOURCEMOD_PLUGINS_ENABLED`](#sourcemod_plugins_enabled) where either selected (comma-separated list) or all (`*`) plugins are disabled/enabled. Plugins are disabled first and then enabled on container start.
-
-### Example
-
-```sh
-# .env
-SOURCEMOD_PLUGINS_DISABLED="*"
-SOURCEMOD_PLUGINS_ENABLED="admin-flatfile,antiflood,reservedslots"
-```
-
-This will disable all plugins and enable `admin-flatfile`, `antiflood` and `reservedslots`. Using `*` is useful to disable/enable all plugins without needing to specify them individually.
-
-The `pug-practice` image also offers a [`PUG_PRACTICE_MINIMAL_PLUGINS`](#pug_practice_minimal_plugins) environment variable that disables all SourceMod plugins and enables only minimal required plugins for PugSetup and PracticeMode for optimal server performance.
 
 ## Updating the Server
 
