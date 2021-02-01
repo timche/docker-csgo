@@ -1,11 +1,5 @@
 FROM timche/csgo
 
-USER root
-
-RUN dpkg --add-architecture i386
-
-RUN apt-get install lib32z1=1:1.2.11.dfsg-1
-
 USER csgo
 
 WORKDIR /home/csgo
