@@ -394,7 +394,7 @@ List of comma-separated PugSetup permissions (e.g. `sm_10man=none,sm_setup=admin
 
 Default: None
 
-List of comma-separated PugSetup configurations (e.g. `maptype=current,record=0:0`) that are set in `addons/sourcemod/configs/pugsetup/setupoptions.cfg` where the first value is the `default` value followed by an optional second value which is the `display_setting` value and a `;` delimiter in between them. Changes are applied on container start.
+List of comma-separated PugSetup configurations (e.g. `maptype=current,record=0:0`) that are set in `addons/sourcemod/configs/pugsetup/setupoptions.cfg` where the first value is the `default` value followed by an optional second value which is the `display_setting` value and a `:` delimiter in between them. Changes are applied on container start.
 
 ##### `PUGSETUP_CVARS`
 
