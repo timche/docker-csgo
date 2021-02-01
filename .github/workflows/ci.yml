@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: base
+        uses: docker/build-push-action@v2
+        with:
+          context: ./base
+          tags: timche/csgo
+          push: false
+      - name: sourcemod
+        uses: docker/build-push-action@v2
+        with:
+          context: ./sourcemod
+          tags: timche/csgo:sourcemod
+          push: false
+      - name: pug-practice
+        uses: docker/build-push-action@v2
+        with:
+          context: ./pug-practice
+          tags: timche/csgo:pug-practice
+          push: false
