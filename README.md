@@ -44,9 +44,13 @@ $ docker run \
   timche/csgo
 ```
 
-- The server will be installed on a volume named `csgo` to [ensure persistence of server files](https://docs.docker.com/storage/).
-- The server will be running on the default port `27015` on the `host` network for [optimal network performance](https://docs.docker.com/network/host/)
-- The server will be running in LAN mode since a [Game Server Login Token](#csgo_gslt) (GSLT) is required to run the server on the internet.
+This is a bare minimum example and the server will be:
+
+- installed on a volume named `csgo` to [ensure persistence of server files](https://docs.docker.com/storage/).
+- running on the default port `27015` on the `host` network for [optimal network performance](https://docs.docker.com/network/host/)
+- running in LAN mode since a [Game Server Login Token](#csgo_gslt) (GSLT) is required to run the server on the internet.
+
+To configure the server with more advanced settings, set [environment variables](#environment-variables).
 
 ## Image Variants
 
@@ -474,7 +478,7 @@ Once the server has been installed, the container will check for a server update
 
 ### Automated (recommended)
 
-[csgo-updater](https://hub.docker.com/r/timche/csgo-updater), a companion Docker image, is automatically watching all containers running this image and will restart them when a server update is available. We recommend this to update your servers without hassle.
+[csgo-updater](https://hub.docker.com/r/timche/csgo-updater), a companion Docker image, is automatically watching all containers running this image and will restart them when a server update is available and the server is empty. We recommend this to update your servers without hassle.
 
 #### Example
 
