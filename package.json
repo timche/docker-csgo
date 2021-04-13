@@ -1,8 +1,16 @@
 {
+  "scripts": {
+    "upgrade-mods": "ts-node upgrade-mods.ts"
+  },
   "devDependencies": {
+    "@tsconfig/node14": "^1.0.0",
+    "execa": "^5.0.0",
+    "got": "^11.8.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   },
   "husky": {
     "hooks": {

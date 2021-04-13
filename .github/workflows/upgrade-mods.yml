@@ -1,0 +1,16 @@
+name: upgrade mods
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      - run: yarn --frozen-lockfile
+      - run: yarn upgrade-mods
