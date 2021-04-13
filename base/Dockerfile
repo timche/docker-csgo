@@ -2,11 +2,11 @@ FROM debian:buster-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    ca-certificates=20190110 \
+    ca-certificates=20200601~deb10u2 \
     lib32gcc1=1:8.3.0-6 \
     lib32stdc++6=8.3.0-6 \
     rsync=3.1.3-6 \
-    unzip=6.0-23+deb10u1 \
+    unzip=6.0-23+deb10u2 \
     wget=1.20.1-1.1 \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m csgo
