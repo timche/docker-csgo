@@ -44,7 +44,7 @@ spec:
         - name: CSGO_DISABLE_BOTS
           value: "true"
         - name: CSGO_GSLT
-          value: "A567E3B3A411E4102A9244FB86384E1E"
+          value: "BF281F0AC3BD2B3687E0002D0FDC8112"
         - name: CSGO_MAX_PLAYERS
           value: "12"
         - name: CSGO_IP
