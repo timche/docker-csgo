@@ -16,6 +16,8 @@ spec:
     env:
     - name: CSGO_DISABLE_BOTS
       value: "true"
+    - name: CSGO_GSLT
+      value: "6130C8F3A2D6C94EDF37A66044BA2D1C"
     - name: CSGO_MAX_PLAYERS
       value: "12"
     - name: CSGO_PARAMS
