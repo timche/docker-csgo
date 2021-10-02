@@ -35,12 +35,14 @@ spec:
           name: csgo-volume
       containers:
       - image: timche/csgo
-        command: ["/home/csgo/server.sh", "start"]
+        command: ["sh", "-c", "/home/csgo/server.sh sync_custom_files; /home/csgo/server.sh start;"]
         name: csgo-2v2
         ports:
         - containerPort: 27015
         - containerPort: 27020
         env:
+        - name: CSGO_GAME_MODE
+          value: "2"
         - name: CSGO_DISABLE_BOTS
           value: "true"
         - name: CSGO_GSLT
