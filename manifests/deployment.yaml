@@ -67,7 +67,7 @@ spec:
             value: "changeme"
         volumeMounts:
         - name: csgo-telegraf-config
-          mountPath: /etc/telegraf.conf
+          mountPath: /etc/telegraf/telegraf.conf
           subPath: telegraf.conf
           readOnly: true
       volumes:
