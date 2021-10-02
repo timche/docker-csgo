@@ -4,6 +4,10 @@ metadata:
   name: csgo-test
 spec:
   nodeName: "161739"
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
   containers:
   - image: timche/csgo
     name: csgo-test
@@ -17,7 +21,7 @@ spec:
   - name: csgo-volume
     hostPath:
       # directory location on host
-      path: /opt/csgo
+      path: /home/npfuser/csgo
       # this field is optional
       type: DirectoryOrCreate
 ---
