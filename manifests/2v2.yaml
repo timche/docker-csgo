@@ -1,0 +1,120 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: csgo-2v2
+#   labels:
+#     app: csgo-2v2
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: csgo-2v2
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: csgo-2v2
+  template:
+    metadata:
+      labels:
+        app: csgo-2v2
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9273'
+    spec:
+      nodeName: "161739"
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "rm -f /home/csgo/server/csgo/console.log; ln -s /dev/stdout /home/csgo/server/csgo/console.log"]
+        volumeMounts:
+        - mountPath: /home/csgo/server
+          name: csgo-volume
+      containers:
+      - image: timche/csgo
+        command: ["/home/csgo/server.sh", "start"]
+        name: csgo-2v2
+        ports:
+        - containerPort: 27015
+        - containerPort: 27020
+        env:
+        - name: CSGO_DISABLE_BOTS
+          value: "true"
+        - name: CSGO_GSLT
+          value: "A567E3B3A411E4102A9244FB86384E1E"
+        - name: CSGO_MAX_PLAYERS
+          value: "12"
+        - name: CSGO_IP
+          value: "0.0.0.0"
+        - name: CSGO_PARAMS
+          #value: "+sv_hibernate_when_empty 0 +log on +sv_log_onefile 1 +sv_logecho 1 +sv_logbans 1 +sv_logfile 1 -condebug -secure"
+          value: "+sv_hibernate_when_empty 0 -condebug -secure"
+        volumeMounts:
+        - mountPath: /home/csgo/server
+          name: csgo-volume
+          readOnly: true
+        - mountPath: /home/csgo/server/csgo/logs
+          name: logs-volume
+        - mountPath: /usr/csgo/cfg/server.cfg
+          subPath: 2v2.cfg
+          name: 2v2config
+      - image: telegraf:1.20-alpine
+        name: csgo-metrics
+        ports:
+        - containerPort: 9273
+        env:
+          - name: CSGO_IP_PORT
+            value: "127.0.0.1:27015"
+          - name: CSGO_RCON
+            value: "changeme"
+        volumeMounts:
+        - name: csgo-telegraf-config
+          mountPath: /etc/telegraf/telegraf.conf
+          subPath: telegraf.conf
+          readOnly: true
+      volumes:
+      - name: logs-volume
+        emptyDir: {}
+      - name: csgo-volume
+        hostPath:
+          # directory location on host
+          path: /home/npfuser
+          # this field is optional
+          type: Directory
+      - name: csgo-telegraf-config
+        configMap:
+          name: csgo-telegraf-config
+          items:
+            - key: telegraf.conf
+              path: telegraf.conf
+      - name: csgo-game-config
+        configmap:
+          name: csgo-game-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: csgo-2v2
+spec:
+  selector:
+    app: csgo-2v2
+  ports:
+    - name: gametcp
+      protocol: TCP
+      port: 27015
+      targetPort: 27015
+    - name: gameudp
+      protocol: UDP
+      port: 27015
+      targetPort: 27015
+    - name: matchandhltvtcp
+      protocol: TCP
+      port: 27020
+      targetPort: 27020
+    - name: matchandhltvudp
+      protocol: UDP
+      port: 27020
+      targetPort: 27020
