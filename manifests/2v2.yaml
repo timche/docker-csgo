@@ -91,7 +91,7 @@ spec:
             - key: telegraf.conf
               path: telegraf.conf
       - name: csgo-game-config
-        configmap:
+        configMap:
           name: csgo-game-config
 ---
 apiVersion: v1
