@@ -60,7 +60,7 @@ spec:
           name: logs-volume
         - mountPath: /usr/csgo/cfg/server.cfg
           subPath: 2v2.cfg
-          name: 2v2config
+          name: csgo-game-config
       - image: telegraf:1.20-alpine
         name: csgo-metrics
         ports:
