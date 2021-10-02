@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: csgo-test
 spec:
-  nodeName: 161739
+  nodeName: "161739"
   containers:
   - image: timche/csgo
     name: csgo-test
