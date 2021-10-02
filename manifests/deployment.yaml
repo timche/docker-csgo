@@ -11,7 +11,7 @@ spec:
   initContainers:
   - name: csgo-init
     image: busybox:1.28
-    command: ['sh', '-c', "mkdir -p /home/npfuser/csgo"]
+    command: ['sh', '-c', "mkdir -p /home/npfuser/csgo; chmod 1000:1000 /home/npfuser/csgo"]
     volumeMounts:
     - mountPath: /home/npfuser
       name: csgo-volume
