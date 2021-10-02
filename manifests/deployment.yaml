@@ -5,10 +5,6 @@ metadata:
   labels:
     app: csgo-test
 spec:
-  template:
-    metadata:
-      labels:
-        app: csgo-test
   nodeName: "161739"
   securityContext:
     runAsUser: 1000
