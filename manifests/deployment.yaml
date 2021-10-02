@@ -34,8 +34,6 @@ spec:
       name: csgo-volume
     - mountPath: /home/csgo/server/csgo/logs
       name: logs-volume
-    - mountPath: /bootstrap-script
-      name: bootstrap-script
   volumes:
   - name: logs-volume
     emptyDir: {}
@@ -45,10 +43,6 @@ spec:
       path: /home/npfuser
       # this field is optional
       type: Directory
-  - name: bootstrap-script
-    configMap:
-      name: bootstrap-script
-      defaultMode: 0777
 ---
 apiVersion: v1
 kind: Service
