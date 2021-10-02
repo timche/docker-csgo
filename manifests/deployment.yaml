@@ -13,7 +13,7 @@ spec:
   initContainers:
   - name: init-myservice
     image: busybox:1.28
-    command: ['sh', '-c', "rm -f /home/csgo/server/console.log; ln -s /dev/stdout /home/csgo/server/console.log"]
+    command: ['sh', '-c', "rm -f /home/csgo/server/csgo/console.log; ln -s /dev/stdout /home/csgo/server/csgo/console.log"]
     volumeMounts:
     - mountPath: /home/csgo/server
       name: csgo-volume
