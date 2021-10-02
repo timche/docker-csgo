@@ -53,18 +53,6 @@ spec:
   selector:
     app: csgo-test
   ports:
-    - protocol: TCP
-      port: 27015
-      targetPort: 27015
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: csgo-test
-spec:
-  selector:
-    app: csgo-test
-  ports:
     - name: gametcp
       protocol: TCP
       port: 27015
