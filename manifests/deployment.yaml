@@ -10,6 +10,9 @@ metadata:
   name: csgo-test
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: csgo-test
   template:
     metadata:
       labels:
