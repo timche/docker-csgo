@@ -9,7 +9,7 @@ apiVersion: apps/v1
 metadata:
   name: csgo-2v2
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels:
       app: csgo-2v2
