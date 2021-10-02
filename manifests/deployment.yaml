@@ -14,7 +14,7 @@ spec:
     command: ['sh', '-c', "mkdir -p /home/npfuser/csgo; chown 1000:1000 /home/npfuser/csgo"]
     volumeMounts:
     - mountPath: /home/npfuser
-      name: csgo-volume
+      name: npfuser-volume
   containers:
   - image: timche/csgo
     name: csgo-test
@@ -25,10 +25,16 @@ spec:
     - mountPath: /home/csgo/server
       name: csgo-volume
   volumes:
-  - name: csgo-volume
+  - name: npfuser-volume
     hostPath:
       # directory location on host
       path: /home/npfuser
+      # this field is optional
+      type: Directory
+  - name: csgo-volume
+    hostPath:
+      # directory location on host
+      path: /home/npfuser/csgo
       # this field is optional
       type: Directory
 ---
