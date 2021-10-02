@@ -21,7 +21,7 @@ spec:
     - name: CSGO_MAX_PLAYERS
       value: "12"
     - name: CSGO_PARAMS
-      value: "+sv_hibernate_when_empty 0 +sv_logecho 1 -condebug -secure"
+      value: "+sv_hibernate_when_empty 0 +sv_logecho 1 +log on +con_logfile /dev/stdout -condebug -secure"
     volumeMounts:
     - mountPath: /home/csgo/server
       name: csgo-volume
