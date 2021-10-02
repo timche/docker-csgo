@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: csgo-updater
+  # namespace: kube-system
+  labels:
+    k8s-app: csgo-updater
+spec:
+  selector:
+    matchLabels:
+      name: csgo-updater
+  template:
+    metadata:
+      labels:
+        name: csgo-updater
+    spec:
+      tolerations:
+      # this toleration is to have the daemonset runnable on master nodes
+      # remove it if your masters can't run pods
+      # - key: node-role.kubernetes.io/master
+      #   operator: Exists
+      #   effect: NoSchedule
+      containers:
+      - name: csgo-updater
+        image: timche/csgo
+        command: ["sh", "-c", "/home/csgo/server.sh install_or_update; while true; do sleep 86400; done"]
+      terminationGracePeriodSeconds: 10
+        volumeMounts:
+        - mountPath: /home/csgo/server
+          name: csgo-volume
+      volumes:
+      - name: csgo-volume
+        hostPath:
+          path: /home/npfuser
+          type: Directory
