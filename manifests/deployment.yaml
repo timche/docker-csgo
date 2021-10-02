@@ -79,7 +79,7 @@ spec:
           path: /home/npfuser
           # this field is optional
           type: Directory
-      - name: telegraf-config
+      - name: csgo-telegraf-config
         configMap:
           name: csgo-telegraf-config
           items:
