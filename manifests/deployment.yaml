@@ -11,14 +11,15 @@ spec:
     runAsGroup: 1000
     fsGroup: 1000
   initContainers:
-  # - name: init-myservice
-  #   image: busybox:1.28
-  #   command: ['sh', '-c', ""]
+  - name: init-myservice
+    image: busybox:1.28
+    command: ['sh', '-c', "rm -f /home/csgo/server/console.log; ln -s /dev/stdout /home/csgo/server/console.log"]
+    volumeMounts:
+    - mountPath: /home/csgo/server
+      name: csgo-volume
   containers:
   - image: timche/csgo
     name: csgo-test
-    command:
-      - /bootstrap-script/bootstrap.sh
     env:
     - name: CSGO_DISABLE_BOTS
       value: "true"
@@ -85,12 +86,3 @@ spec:
       protocol: UDP
       port: 27020
       targetPort: 27020
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: bootstrap-script
-data:
-  bootstrap.sh: |
-    #!/bin/bash
-    ln -s /dev/stdout /home/csgo/server/console.log
