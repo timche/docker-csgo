@@ -1,52 +1,62 @@
-apiVersion: v1
-kind: Pod
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: csgo-test
+#   labels:
+#     app: csgo-test
+kind: Deployment
+apiVersion: extensions/v1beta1
 metadata:
   name: csgo-test
-  labels:
-    app: csgo-test
 spec:
-  nodeName: "161739"
-  securityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    fsGroup: 1000
-  initContainers:
-  - name: init-myservice
-    image: busybox:1.28
-    command: ['sh', '-c', "rm -f /home/csgo/server/csgo/console.log; ln -s /dev/stdout /home/csgo/server/csgo/console.log"]
-    volumeMounts:
-    - mountPath: /home/csgo/server
-      name: csgo-volume
-  containers:
-  - image: timche/csgo
-    name: csgo-test
-    ports:
-    - containerPort: 27015
-    - containerPort: 27020
-    env:
-    - name: CSGO_DISABLE_BOTS
-      value: "true"
-    - name: CSGO_GSLT
-      value: "6130C8F3A2D6C94EDF37A66044BA2D1C"
-    - name: CSGO_MAX_PLAYERS
-      value: "12"
-    - name: CSGO_PARAMS
-      #value: "+sv_hibernate_when_empty 0 +log on +sv_log_onefile 1 +sv_logecho 1 +sv_logbans 1 +sv_logfile 1 -condebug -secure"
-      value: "+sv_hibernate_when_empty 0 -condebug -secure"
-    volumeMounts:
-    - mountPath: /home/csgo/server
-      name: csgo-volume
-    - mountPath: /home/csgo/server/csgo/logs
-      name: logs-volume
-  volumes:
-  - name: logs-volume
-    emptyDir: {}
-  - name: csgo-volume
-    hostPath:
-      # directory location on host
-      path: /home/npfuser
-      # this field is optional
-      type: Directory
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: csgo-test
+    spec:
+      nodeName: "161739"
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "rm -f /home/csgo/server/csgo/console.log; ln -s /dev/stdout /home/csgo/server/csgo/console.log"]
+        volumeMounts:
+        - mountPath: /home/csgo/server
+          name: csgo-volume
+      containers:
+      - image: timche/csgo
+        name: csgo-test
+        ports:
+        - containerPort: 27015
+        - containerPort: 27020
+        env:
+        - name: CSGO_DISABLE_BOTS
+          value: "true"
+        - name: CSGO_GSLT
+          value: "6130C8F3A2D6C94EDF37A66044BA2D1C"
+        - name: CSGO_MAX_PLAYERS
+          value: "12"
+        - name: CSGO_PARAMS
+          #value: "+sv_hibernate_when_empty 0 +log on +sv_log_onefile 1 +sv_logecho 1 +sv_logbans 1 +sv_logfile 1 -condebug -secure"
+          value: "+sv_hibernate_when_empty 0 -condebug -secure"
+        volumeMounts:
+        - mountPath: /home/csgo/server
+          name: csgo-volume
+        - mountPath: /home/csgo/server/csgo/logs
+          name: logs-volume
+      volumes:
+      - name: logs-volume
+        emptyDir: {}
+      - name: csgo-volume
+        hostPath:
+          # directory location on host
+          path: /home/npfuser
+          # this field is optional
+          type: Directory
 ---
 apiVersion: v1
 kind: Service
