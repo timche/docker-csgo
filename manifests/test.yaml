@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: csgo-test
+spec:
+  replicas: 1
+    template:
+      metadata:
+        labels:
+          app: csgo-test
+  nodeName: 161739
+  containers:
+  - image: timche/csgo
+    name: csgo-test
+    env:
+    - name: CSGO_DISABLE_BOTS
+      value: "true"
+    volumeMounts:
+    - mountPath: /home/csgo/server
+      name: csgo-volume
+  volumes:
+  - name: csgo-volume
+    hostPath:
+      # directory location on host
+      path: /opt/csgo
+      # this field is optional
+      type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: csgo-test
+  labels:
+    app: csgo-test
+spec:
+  selector:
+    app: csgo-test
+  ports:
+    - protocol: TCP
+      port: 27015
+      targetPort: 27015
