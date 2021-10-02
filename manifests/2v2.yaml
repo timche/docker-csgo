@@ -35,7 +35,7 @@ spec:
           name: csgo-volume
       containers:
       - image: timche/csgo
-        command: ["sh", "-c", "/home/csgo/server.sh sync_custom_files; /home/csgo/server.sh start;"]
+        command: ["/home/csgo/server.sh", "start"]
         name: csgo-2v2
         ports:
         - containerPort: 27015
@@ -60,9 +60,6 @@ spec:
           readOnly: true
         - mountPath: /home/csgo/server/csgo/logs
           name: logs-volume
-        - mountPath: /usr/csgo/cfg/server.cfg
-          subPath: 2v2.cfg
-          name: csgo-game-config
       - image: telegraf:1.20-alpine
         name: csgo-metrics
         ports:
