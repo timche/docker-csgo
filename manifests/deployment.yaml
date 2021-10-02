@@ -20,6 +20,9 @@ spec:
   containers:
   - image: timche/csgo
     name: csgo-test
+    ports:
+    - containerPort: 27015
+    - containerPort: 27020
     env:
     - name: CSGO_DISABLE_BOTS
       value: "true"
