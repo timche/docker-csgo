@@ -56,6 +56,10 @@ spec:
           value: "12"
         - name: CSGO_IP
           value: "0.0.0.0"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: CSGO_PARAMS
           #value: "+sv_hibernate_when_empty 0 +log on +sv_log_onefile 1 +sv_logecho 1 +sv_logbans 1 +sv_logfile 1 -condebug -secure"
           value: "+sv_hibernate_when_empty 0 -condebug -secure"
