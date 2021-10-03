@@ -83,6 +83,13 @@ spec:
           mountPath: /etc/telegraf/telegraf.conf
           subPath: telegraf.conf
           readOnly: true
+      tolerations:
+      - key: "type"
+        operator: "Equal"
+        value: "csgo"
+        effect: "NoSchedule"
+      nodeSelector:
+        type: csgo
       volumes:
       - name: logs-volume
         emptyDir: {}
