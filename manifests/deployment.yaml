@@ -36,6 +36,12 @@ spec:
           name: csgo-volume
       containers:
       - image: timche/csgo
+        resources:
+          requests:
+            memory: "4G"
+            cpu: "2"
+          limits:
+            cpu: "2"
         command: ["/home/csgo/server.sh", "start"]
         name: csgo-test
         ports:
