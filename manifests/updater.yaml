@@ -24,10 +24,10 @@ spec:
       - name: csgo-updater
         image: timche/csgo
         command: ["sh", "-c", "/home/csgo/server.sh install_or_update; while true; do sleep 86400; done"]
-      terminationGracePeriodSeconds: 10
         volumeMounts:
         - mountPath: /home/csgo/server
           name: csgo-volume
+      terminationGracePeriodSeconds: 10
       volumes:
       - name: csgo-volume
         hostPath:
