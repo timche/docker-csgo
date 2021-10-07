@@ -20,7 +20,7 @@ mmsource_url="https://mms.alliedmods.net/mmsdrop/${mmsource_version}/mmsource-${
 
 sourcemod_exact_version="${SOURCEMOD_VERSION-"1.10.0"}"
 sourcemod_version=$(echo ${sourcemod_exact_version} | cut -f1-2 -d '.')
-sourcemod_url="https://sm.alliedmods.net/smdrop/${sourcemod_version}/sourcemod-${sourcemod_exact_version}-git${SOURCEMOD_BUILD-6515}-linux.tar.gz"
+sourcemod_url="https://sm.alliedmods.net/smdrop/${sourcemod_version}/sourcemod-${sourcemod_exact_version}-git${SOURCEMOD_BUILD-6516}-linux.tar.gz"
 
 install_or_update_mod() {
   cd $csgo_dir
