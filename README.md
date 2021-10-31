@@ -310,7 +310,7 @@ Default: `1.11.0`
 
 > _`sourcemod`, `pug-practice` image only._
 
-Default: `1144`
+Default: `1145`
 
 [Metamod:Source build number](https://www.sourcemm.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start. Build number must exist at version.
 
@@ -326,7 +326,7 @@ Default: `1.10.0`
 
 > _`sourcemod`, `pug-practice` image only._
 
-Default: `6502`
+Default: `6523`
 
 [SourceMod build number](https://www.sourcemod.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start. Build number must exist at version.
 
