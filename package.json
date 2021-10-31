@@ -3,12 +3,15 @@
     "upgrade-mods": "ts-node upgrade-mods.ts"
   },
   "devDependencies": {
+    "@octokit/rest": "^18.12.0",
     "@tsconfig/node14": "^1.0.0",
+    "@types/semver": "^7.3.9",
     "execa": "^5.0.0",
     "got": "^11.8.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
+    "semver": "^7.3.5",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },

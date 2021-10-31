@@ -14,3 +14,5 @@ jobs:
           git config user.email github-actions@github.com
       - run: yarn --frozen-lockfile
       - run: yarn upgrade-mods
+        env:
+          OCTOKIT_AUTH_TOKEN: ${{ secrets.OCTOKIT_AUTH_TOKEN }}
