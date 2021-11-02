@@ -125,7 +125,7 @@ async function upgradeMods() {
         repo: repoName,
         tag_name: newVersionTag,
         name: `v${newVersionTag}`,
-        body: `# Changed\n\n${upgradedModsCommits.reduce((acc, upgradedMod) => {
+        body: `## Changes\n${upgradedModsCommits.reduce((acc, upgradedMod) => {
           if (upgradedMod) {
             const [commitHash, commitMessage] = upgradedMod;
             return `${acc}\n- ${commitMessage} ${commitHash}`;
