@@ -292,7 +292,7 @@ Add server configs for competitive 5v5, knife round, aim map and FFA deathmatch 
 
 ##### `SERVER_CONFIGS_VERSION`
 
-Default: `0.1.0`
+Default: `1.1.0`
 
 [csgo-server-configs version](https://github.com/timche/csgo-server-configs/releases). Changing this will update/downgrade it on container start. Only works with `SERVER_CONFIGS` set to `true`.
 
