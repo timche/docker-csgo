@@ -20,8 +20,8 @@ install() {
   set -x
 
   $steam_dir/steamcmd.sh \
-    +login anonymous \
     +force_install_dir $server_dir \
+    +login anonymous \
     +app_update 740 validate \
     +quit
 
