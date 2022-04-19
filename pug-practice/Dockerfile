@@ -1,4 +1,6 @@
-FROM timche/csgo:sourcemod
+FROM timche/csgo
+
+USER csgo
 
 WORKDIR /home/csgo
 
