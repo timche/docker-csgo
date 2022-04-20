@@ -31,4 +31,4 @@ WORKDIR /home/csgo
 
 COPY server.sh .
 
-CMD [ "/home/csgo/server.sh" ]
+CMD [ "bash", "/home/csgo/server.sh" ]

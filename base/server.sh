@@ -147,7 +147,7 @@ start() {
 
   set -x
 
-  exec $server_dir/srcds_run \
+  bash $server_dir/srcds_run \
     -game csgo \
     -console \
     -norestart \
