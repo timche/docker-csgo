@@ -18,9 +18,9 @@ mmsource_exact_version="${METAMOD_VERSION-"1.11.0"}"
 mmsource_version=$(echo ${mmsource_exact_version} | cut -f1-2 -d '.')
 mmsource_url="https://mms.alliedmods.net/mmsdrop/${mmsource_version}/mmsource-${mmsource_exact_version}-git${METAMOD_BUILD-1148}-linux.tar.gz"
 
-sourcemod_exact_version="${SOURCEMOD_VERSION-"1.10.0"}"
+sourcemod_exact_version="${SOURCEMOD_VERSION-"1.11.0"}"
 sourcemod_version=$(echo ${sourcemod_exact_version} | cut -f1-2 -d '.')
-sourcemod_url="https://sm.alliedmods.net/smdrop/${sourcemod_version}/sourcemod-${sourcemod_exact_version}-git${SOURCEMOD_BUILD-6545}-linux.tar.gz"
+sourcemod_url="https://sm.alliedmods.net/smdrop/${sourcemod_version}/sourcemod-${sourcemod_exact_version}-git${SOURCEMOD_BUILD-6905}-linux.tar.gz"
 
 install_or_update_mod() {
   cd $csgo_dir
