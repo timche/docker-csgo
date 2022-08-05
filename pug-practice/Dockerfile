@@ -1,5 +1,7 @@
 FROM timche/csgo:sourcemod
 
+USER csgo
+
 WORKDIR /home/csgo
 
 COPY server_pug_practice.sh .

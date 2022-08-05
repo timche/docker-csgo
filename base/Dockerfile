@@ -8,6 +8,7 @@ RUN apt-get update \
     rsync=3.1.3-6 \
     unzip=6.0-23+deb10u2 \
     wget=1.20.1-1.1 \
+    lib32z1=1:1.2.11.dfsg-1 \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m csgo
 
