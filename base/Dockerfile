@@ -20,7 +20,9 @@ RUN mkdir /home/csgo/Steam && \
 WORKDIR /home/csgo/Steam
 
 RUN wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxf - \
-    && /home/csgo/Steam/steamcmd.sh +quit
+    && /home/csgo/Steam/steamcmd.sh +quit \
+    && mkdir -p /home/csgo/.steam/sdk32 \
+    && ln -s /home/csgo/Steam/linux32/steamclient.so /home/csgo/.steam/sdk32/steamclient.so
 
 WORKDIR /home/csgo
 
