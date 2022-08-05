@@ -1,4 +1,4 @@
-FROM timche/csgo
+FROM timche/csgo:sourcemod
 
 USER csgo
 
