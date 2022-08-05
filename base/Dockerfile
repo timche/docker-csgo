@@ -9,6 +9,9 @@ RUN apt-get update \
     unzip=6.0-23+deb10u2 \
     wget=1.20.1-1.1 \
     lib32z1=1:1.2.11.dfsg-1 \
+    locales \
+    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m csgo
 
