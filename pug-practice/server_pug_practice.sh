@@ -15,7 +15,7 @@ csgo_dir=$HOME/server/csgo
 practicemode_version="${PRACTICEMODE_VERSION-"1.3.3"}"
 practicemode_url="https://github.com/splewis/csgo-practice-mode/releases/download/${practicemode_version}/practicemode_${practicemode_version}.zip"
 
-pugsetup_version="${PUGSETUP_VERSION-"2.0.5"}"
+pugsetup_version="${PUGSETUP_VERSION-"2.0.7"}"
 pugsetup_url="https://github.com/splewis/csgo-pug-setup/releases/download/${pugsetup_version}/pugsetup_${pugsetup_version}.zip"
 
 install_or_update_plugins() {

@@ -358,7 +358,7 @@ List of comma-separated Steam IDs that are SourceMod admins (e.g. `STEAM_0:0:123
 
 > _`pug-practice` image only._
 
-Default: `2.0.5`
+Default: `2.0.7`
 
 [PugSetup version](https://github.com/splewis/csgo-pug-setup/releases) running on the server. Changing this will update/downgrade it on container start.
 
