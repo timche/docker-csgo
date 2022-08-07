@@ -1,9 +1,14 @@
 import fs from "fs/promises";
 import path from "path";
 import got from "got";
-import execa from "execa";
+import { execa } from "execa";
 import semver from "semver";
 import { Octokit } from "@octokit/rest";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const octokit = new Octokit({
   auth: process.env.OCTOKIT_AUTH_TOKEN,
@@ -85,20 +90,26 @@ async function upgradeMods() {
         mod: "sourcemod",
         downloadPageUrl:
           "https://www.sourcemod.net/downloads.php?branch=stable",
-        versionBuildNumberRegExp: /<a class='quick-download download-link' href='https:\/\/sm\.alliedmods\.net\/smdrop\/\d+.\d+\/sourcemod-(\d+.\d+.\d+)-git(\d+)-linux\.tar.gz'>/,
+        versionBuildNumberRegExp:
+          /<a class='quick-download download-link' href='https:\/\/sm\.alliedmods\.net\/smdrop\/\d+.\d+\/sourcemod-(\d+.\d+.\d+)-git(\d+)-linux\.tar.gz'>/,
         versionReplaceRegExp: /(\${SOURCEMOD_VERSION-")\d+\.\d+.\d+("}")/,
-        readmeVersionReplaceRegExp: /(##### `SOURCEMOD_VERSION`\n\n.+\n\nDefault: `)[0-9.]+(`)/,
+        readmeVersionReplaceRegExp:
+          /(##### `SOURCEMOD_VERSION`\n\n.+\n\nDefault: `)[0-9.]+(`)/,
         buildNumberReplaceRegExp: /(\${SOURCEMOD_BUILD-)\d+(})/,
-        readmeBuildNumberReplaceRegExp: /(##### `SOURCEMOD_BUILD`\n\n.+\n\nDefault: `)[0-9]+(`)/,
+        readmeBuildNumberReplaceRegExp:
+          /(##### `SOURCEMOD_BUILD`\n\n.+\n\nDefault: `)[0-9]+(`)/,
       }),
       await upgradeMod({
         mod: "metamod",
         downloadPageUrl: "https://www.sourcemm.net/downloads.php?branch=stable",
-        versionBuildNumberRegExp: /<a class='quick-download download-link' href='https:\/\/mms\.alliedmods\.net\/mmsdrop\/\d+.\d+\/mmsource-(\d+.\d+.\d+)-git(\d+)-linux\.tar.gz'>/,
+        versionBuildNumberRegExp:
+          /<a class='quick-download download-link' href='https:\/\/mms\.alliedmods\.net\/mmsdrop\/\d+.\d+\/mmsource-(\d+.\d+.\d+)-git(\d+)-linux\.tar.gz'>/,
         versionReplaceRegExp: /(\${METAMOD_VERSION-")\d+\.\d+.\d+("}")/,
-        readmeVersionReplaceRegExp: /(##### `METAMOD_VERSION`\n\n.+\n\nDefault: `)[0-9.]+(`)/,
+        readmeVersionReplaceRegExp:
+          /(##### `METAMOD_VERSION`\n\n.+\n\nDefault: `)[0-9.]+(`)/,
         buildNumberReplaceRegExp: /(\${METAMOD_BUILD-)\d+(})/,
-        readmeBuildNumberReplaceRegExp: /(##### `METAMOD_BUILD`\n\n.+\n\nDefault: `)[0-9]+(`)/,
+        readmeBuildNumberReplaceRegExp:
+          /(##### `METAMOD_BUILD`\n\n.+\n\nDefault: `)[0-9]+(`)/,
       }),
     ].filter(Boolean);
 

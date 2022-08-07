@@ -1,4 +1,4 @@
-name: upgrade mods
+name: upgrade-mods
 
 on:
   schedule:
@@ -13,7 +13,7 @@ jobs:
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-      - run: yarn --frozen-lockfile
-      - run: yarn upgrade-mods
+      - run: npm ci
+      - run: npm run upgrade-mods
         env:
           OCTOKIT_AUTH_TOKEN: ${{ secrets.OCTOKIT_AUTH_TOKEN }}
