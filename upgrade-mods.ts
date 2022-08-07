@@ -139,7 +139,7 @@ async function upgradeMods() {
         body: `## Changes\n${upgradedModsCommits.reduce((acc, upgradedMod) => {
           if (upgradedMod) {
             const [commitHash, commitMessage] = upgradedMod;
-            return `${acc}\n- ${commitMessage} ${commitHash}`;
+            return `${acc}\n- sourcemod, pug-practice: ${commitMessage} ${commitHash}`;
           }
           return acc;
         }, "")}`,
