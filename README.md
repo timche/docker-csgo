@@ -366,7 +366,7 @@ Default: `2.0.7`
 
 > _`pug-practice` image only._
 
-Default: `1.3.3`
+Default: `1.3.4`
 
 [PracticeMode version](https://github.com/splewis/csgo-practice-mode/releases) running on the server. Changing this will update/downgrade it on container start.
 
