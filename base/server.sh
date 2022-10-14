@@ -19,8 +19,8 @@ install() {
 
   set -x
 
-  $steam_dir/steamcmd.sh \
-    +force_install_dir $server_dir \
+  "$steam_dir"/steamcmd.sh \
+    +force_install_dir "$server_dir" \
     +login anonymous \
     +app_update 740 validate \
     +quit
@@ -29,7 +29,7 @@ install() {
 
   echo '> Done'
 
-  touch $server_installed_lock_file
+  touch "$server_installed_lock_file"
 }
 
 sync_custom_files() {
@@ -40,7 +40,7 @@ sync_custom_files() {
 
     set -x
 
-    rsync -rti $csgo_custom_files_dir/ $csgo_dir
+    rsync -rti "$csgo_custom_files_dir/" "$csgo_dir"
 
     set +x
 
@@ -52,7 +52,7 @@ sync_custom_files() {
 
 should_add_server_configs() {
   if [ "${SERVER_CONFIGS-"false"}" = "true" ]; then
-    cd $csgo_dir
+    cd "$csgo_dir"
 
     version="${SERVER_CONFIGS_VERSION-"1.1.0"}"
     server_configs_url="https://github.com/timche/csgo-server-configs/releases/download/v${version}/csgo-server-configs-${version}.zip"
@@ -64,16 +64,16 @@ should_add_server_configs() {
     installed=$(<server_configs)
 
     if [ "${installed}" != "${server_configs_url}" ]; then
-      wget -q -O server_configs.zip $server_configs_url
+      wget -q -O server_configs.zip "$server_configs_url"
       unzip -qo server_configs.zip
       rm server_configs.zip
-      echo $server_configs_url >"server_configs"
+      echo "$server_configs_url" >"server_configs"
     fi
   fi
 }
 
 should_disable_bots() {
-  cd $csgo_dir
+  cd "$csgo_dir"
 
   if [ "${CSGO_DISABLE_BOTS-"false"}" = "true" ]; then
     if [ -f "botchatter.db" ]; then
@@ -147,7 +147,7 @@ start() {
 
   set -x
 
-  exec $server_dir/srcds_run \
+  exec "$server_dir"/srcds_run \
     -game csgo \
     -console \
     -norestart \
@@ -162,8 +162,8 @@ start() {
     +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
     +map "${CSGO_MAP-de_dust2}" \
     +rcon_password "${CSGO_RCON_PW-changeme}" \
-    $additionalParams \
-    $CSGO_PARAMS
+    "$additionalParams" \
+    "$CSGO_PARAMS"
 }
 
 update() {
@@ -171,9 +171,9 @@ update() {
 
   set -x
 
-  $steam_dir/steamcmd.sh \
+  "$steam_dir"/steamcmd.sh \
     +login anonymous \
-    +force_install_dir $HOME/server \
+    +force_install_dir "$HOME"/server \
     +app_update 740 \
     +quit
 
@@ -190,7 +190,7 @@ install_or_update() {
   fi
 }
 
-if [ ! -z $1 ]; then
+if [[ -n $1 ]]; then
   $1
 else
   install_or_update
