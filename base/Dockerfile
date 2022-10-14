@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
-ARG PACKAGES="ca-certificates lib32gcc1 lib32stdc++6 rsync unzip wget lib32z1 locales"
+ARG PACKAGES="ca-certificates lib32gcc-s1 lib32stdc++6 rsync unzip curl lib32z1 locales"
 ARG LOCALE="en_US.UTF-8 UTF-8"
 ARG STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"
 
@@ -15,8 +15,7 @@ RUN useradd -m csgo
 
 USER csgo
 
-RUN mkdir /home/csgo/Steam && \
-    mkdir /home/csgo/server
+RUN mkdir -p /home/csgo/server
 
 WORKDIR /home/csgo/Steam
 
