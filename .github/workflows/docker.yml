@@ -33,3 +33,9 @@ jobs:
           repository: timche/csgo
           tags: pug-practice,pug-practice-${{ github.event.release.tag_name }}
           path: ./pug-practice
+      - name: sync-description-with-readme
+        uses: peter-evans/dockerhub-description@v3.1.2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          repository: timche/csgo
