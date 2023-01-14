@@ -29,7 +29,7 @@ install_or_update_mod() {
     touch $1
   fi
 
-  installed=$(<$1)
+  installed=$(< $1)
 
   if [ "${installed}" = "$2" ]; then
     return
@@ -60,7 +60,7 @@ install_or_update_plugin() {
     touch ${args[1]}
   fi
 
-  installed=$(<${args[1]})
+  installed=$(< ${args[1]})
 
   if [ "${installed}" = "${args[2]}" ]; then
     return

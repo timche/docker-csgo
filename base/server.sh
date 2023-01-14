@@ -61,13 +61,13 @@ should_add_server_configs() {
       touch "server_configs"
     fi
 
-    installed=$(<server_configs)
+    installed=$(< server_configs)
 
     if [ "${installed}" != "${server_configs_url}" ]; then
       wget -q -O server_configs.zip $server_configs_url
       unzip -qo server_configs.zip
       rm server_configs.zip
-      echo $server_configs_url >"server_configs"
+      echo $server_configs_url > "server_configs"
     fi
   fi
 }
