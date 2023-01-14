@@ -36,11 +36,12 @@ sync_custom_files() {
   echo "> Checking for custom files at \"$csgo_custom_files_dir\" ..."
 
   if [ -d "$csgo_custom_files_dir" ]; then
-    echo '> Found custom files, applying ...'
+    echo "> Found custom files. Syncing with \"${csgo_dir}\" ..."
 
     set -x
 
-    rsync -rti $csgo_custom_files_dir/ $csgo_dir
+    cp -asf $csgo_custom_files_dir/* $csgo_dir # Copy custom files as soft links
+    find $csgo_dir -xtype l -delete            # Find and delete broken soft links
 
     set +x
 
@@ -63,7 +64,7 @@ should_add_server_configs() {
 
     installed=$(< server_configs)
 
-    if [ "${installed}" != "${server_configs_url}" ]; then
+    if [ "${installed}" != "${server_configs_url}" ] || [ "${VALIDATE_SERVER_FILES-"false"}" = "true" ]; then
       wget -q -O server_configs.zip $server_configs_url
       unzip -qo server_configs.zip
       rm server_configs.zip
@@ -179,17 +180,33 @@ start() {
 }
 
 update() {
-  echo '> Checking for server update ...'
+  if [ "${VALIDATE_SERVER_FILES-"false"}" = "true" ]; then
+    echo '> Validating server files and checking for server update ...'
+  else
+    echo '> Checking for server update ...'
+  fi
 
-  set -x
+  if [ "${VALIDATE_SERVER_FILES-"false"}" = "true" ]; then
+    set -x
 
-  $steam_dir/steamcmd.sh \
-    +login anonymous \
-    +force_install_dir $HOME/server \
-    +app_update 740 \
-    +quit
+    $steam_dir/steamcmd.sh \
+      +force_install_dir $server_dir \
+      +login anonymous \
+      +app_update 740 validate \
+      +quit
 
-  set +x
+    set +x
+  else
+    set -x
+
+    $steam_dir/steamcmd.sh \
+      +force_install_dir $server_dir \
+      +login anonymous \
+      +app_update 740 \
+      +quit
+
+    set +x
+  fi
 
   echo '> Done'
 }

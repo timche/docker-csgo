@@ -420,6 +420,14 @@ List of comma-separated PugSetup configurations (e.g. `sm_pugsetup_damageprint_a
 
 ### Other
 
+##### `VALIDATE_SERVER_FILES`
+
+Default: `false`
+
+Validate and restore missing/fix broken server files (incl. Metamod, SourceMod, PugSetup and PracticeMode if you're using `sourcemod` or `pug-practice` images) on container start. Can be enabled with `true`.
+
+This should especially be used whenever custom server files have been deleted and have overwritten files before, e.g. `addons/sourcemod/configs/admins_simple.ini`, and you want to restore the original files.
+
 ##### `DEBUG`
 
 Default: `false`
@@ -444,7 +452,9 @@ The `pug-practice` image also offers a [`PUG_PRACTICE_MINIMAL_PLUGINS`](#pug_pra
 
 ## Populating with Own Server Files
 
-The server can be populated with your own custom server files (e.g. configs and maps) through a mounted directory that has the same folder structure as the server `csgo` folder in order to add or overwrite the files at their respective paths. The directory must be mounted at [`CSGO_CUSTOM_FILES_DIR`](#csgo_custom_files_dir) (default: `/usr/csgo`) and will be synced with the server `csgo` folder at each start of the container.
+The server can be populated with your own custom server files (e.g. configs and maps) through a mounted directory that has the same folder structure as the server `csgo` folder in order to add or overwrite the files at their respective paths. Deleted custom server files, which have been added or have overwritten files before, are also removed from the `csgo` folder. The directory must be mounted at [`CSGO_CUSTOM_FILES_DIR`](#csgo_custom_files_dir) (default: `/usr/csgo`) and will be synced with the server `csgo` folder at each start of the container.
+
+**Note:** See [`VALIDATE_SERVER_FILES`](#validate_server_files) on how to restore original files if they've been overwritten before but are removed now.
 
 ### Example
 
@@ -452,6 +462,7 @@ The server can be populated with your own custom server files (e.g. configs and 
 
 Custom server files in `/home/user/custom-files`:
 
+<!-- prettier-ignore-start -->
 ```sh
 custom-files
 ├── addons
@@ -461,11 +472,13 @@ custom-files
 └── cfg
     └── server.cfg # Will be added
 ```
+<!-- prettier-ignore-end -->
 
 #### Container
 
 `/home/user/custom-files` mounted to [`CSGO_CUSTOM_FILES_DIR`](#csgo_custom_files_dir) (default: `/usr/csgo`) in the container:
 
+<!-- prettier-ignore-start -->
 ```sh
 $ docker run \
   -v=csgo:/home/csgo/server \
@@ -473,6 +486,7 @@ $ docker run \
   --net=host \
   timche/csgo
 ```
+<!-- prettier-ignore-end -->
 
 ## Updating the Server
 

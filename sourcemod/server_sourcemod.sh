@@ -31,7 +31,7 @@ install_or_update_mod() {
 
   installed=$(< $1)
 
-  if [ "${installed}" = "$2" ]; then
+  if [ "${installed}" = "$2" ] && [ "${VALIDATE_SERVER_FILES-"false"}" = "false" ]; then
     return
   fi
 
@@ -62,7 +62,7 @@ install_or_update_plugin() {
 
   installed=$(< ${args[1]})
 
-  if [ "${installed}" = "${args[2]}" ]; then
+  if [ "${installed}" = "${args[2]}" ] && [ "${VALIDATE_SERVER_FILES-"false"}" = "false" ]; then
     return
   fi
 
@@ -74,11 +74,7 @@ install_or_update_plugin() {
 
   wget -q -O plugin.zip ${args[2]}
 
-  if [ -z "${installed}" ]; then
-    unzip -qn plugin.zip
-  else
-    unzip -qo plugin.zip
-  fi
+  unzip -qo plugin.zip
 
   rm plugin.zip
 
