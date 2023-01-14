@@ -77,15 +77,27 @@ should_disable_bots() {
 
   if [ "${CSGO_DISABLE_BOTS-"false"}" = "true" ]; then
     if [ -f "botchatter.db" ]; then
-      rm "botchatter.db"
+      mv "botchatter.db" "botchatter.disabled.db"
     fi
 
     if [ -f "botprofilecoop.db" ]; then
-      rm "botprofilecoop.db"
+      mv "botprofilecoop.db" "botprofilecoop.disabled.db"
     fi
 
     if [ -f "botprofile.db" ]; then
-      rm "botprofile.db"
+      mv "botprofile.db" "botprofile.disabled.db"
+    fi
+  else
+    if [ -f "botchatter.disabled.db" ]; then
+      mv "botchatter.disabled.db" "botchatter.db"
+    fi
+
+    if [ -f "botprofilecoop.disabled.db" ]; then
+      mv "botprofilecoop.disabled.db" "botprofilecoop.db"
+    fi
+
+    if [ -f "botprofile.disabled.db" ]; then
+      mv "botprofile.disabled.db" "botprofile.db"
     fi
   fi
 }
