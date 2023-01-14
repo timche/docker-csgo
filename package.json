@@ -2,22 +2,23 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write **/*.{ts,md,yml,sh}",
-    "upgrade-mods": "ts-node --esm upgrade-mods.ts",
+    "upgrade-mods": "tsx ./scripts/upgrade-mods.ts",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@octokit/rest": "^19.0.3",
+    "@octokit/rest": "^19.0.5",
     "@tsconfig/node16": "^1.0.3",
-    "@types/semver": "^7.3.10",
+    "@types/node": "^18.11.18",
+    "@types/semver": "^7.3.13",
     "execa": "^6.1.0",
-    "got": "^12.3.1",
+    "got": "^12.5.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
     "prettier-plugin-sh": "^0.12.8",
-    "semver": "^7.3.7",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
+    "semver": "^7.3.8",
+    "tsx": "^3.12.2",
+    "typescript": "^4.9.4"
   },
   "lint-staged": {
     "*.{ts,md,yml,sh}": [

@@ -16,11 +16,12 @@ const octokit = new Octokit({
 
 const serverSourceModPath = path.resolve(
   __dirname,
+  "..",
   "sourcemod",
   "server_sourcemod.sh"
 );
 
-const readmePath = path.join(__dirname, "README.md");
+const readmePath = path.resolve(__dirname, "..", "README.md");
 
 const isCI = process.env.CI === "true";
 
