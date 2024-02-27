@@ -11,8 +11,8 @@ shopt -s extglob
 steam_dir="${HOME}/Steam"
 server_dir="${HOME}/server"
 server_installed_lock_file="${server_dir}/installed.lock"
-csgo_dir="${server_dir}/csgo"
-csgo_custom_files_dir="${CSGO_CUSTOM_FILES_DIR-"/usr/csgo"}"
+vietnam_dir="${server_dir}/vietnam"
+vietnam_custom_files_dir="${VIETNAM_CUSTOM_FILES_DIR-"/usr/vietnam"}"
 
 install() {
   echo '> Installing server ...'
@@ -22,7 +22,7 @@ install() {
   $steam_dir/steamcmd.sh \
     +force_install_dir $server_dir \
     +login anonymous \
-    +app_update 740 validate \
+    +app_update 1136190 validate \
     +quit
 
   set +x
@@ -33,15 +33,15 @@ install() {
 }
 
 sync_custom_files() {
-  echo "> Checking for custom files at \"$csgo_custom_files_dir\" ..."
+  echo "> Checking for custom files at \"$vietnam_custom_files_dir\" ..."
 
-  if [ -d "$csgo_custom_files_dir" ]; then
-    echo "> Found custom files. Syncing with \"${csgo_dir}\" ..."
+  if [ -d "$vietnam_custom_files_dir" ]; then
+    echo "> Found custom files. Syncing with \"${vietnam_dir}\" ..."
 
     set -x
 
-    cp -asf $csgo_custom_files_dir/* $csgo_dir # Copy custom files as soft links
-    find $csgo_dir -xtype l -delete            # Find and delete broken soft links
+    cp -asf $vietnam_custom_files_dir/* $vietnam_dir # Copy custom files as soft links
+    find $vietnam_dir -xtype l -delete            # Find and delete broken soft links
 
     set +x
 
@@ -51,132 +51,75 @@ sync_custom_files() {
   fi
 }
 
-should_add_server_configs() {
-  if [ "${SERVER_CONFIGS-"false"}" = "true" ]; then
-    cd $csgo_dir
-
-    version="${SERVER_CONFIGS_VERSION-"1.1.0"}"
-    server_configs_url="https://github.com/timche/csgo-server-configs/releases/download/v${version}/csgo-server-configs-${version}.zip"
-
-    if [ ! -f "server_configs" ]; then
-      touch "server_configs"
-    fi
-
-    installed=$(< server_configs)
-
-    if [ "${installed}" != "${server_configs_url}" ] || [ "${VALIDATE_SERVER_FILES-"false"}" = "true" ]; then
-      wget -q -O server_configs.zip $server_configs_url
-      unzip -qo server_configs.zip
-      rm server_configs.zip
-      echo $server_configs_url > "server_configs"
-    fi
-  fi
-}
-
-should_disable_bots() {
-  cd $csgo_dir
-
-  if [ "${CSGO_DISABLE_BOTS-"false"}" = "true" ]; then
-    if [ -f "botchatter.db" ]; then
-      mv "botchatter.db" "botchatter.disabled.db"
-    fi
-
-    if [ -f "botprofilecoop.db" ]; then
-      mv "botprofilecoop.db" "botprofilecoop.disabled.db"
-    fi
-
-    if [ -f "botprofile.db" ]; then
-      mv "botprofile.db" "botprofile.disabled.db"
-    fi
-  else
-    if [ -f "botchatter.disabled.db" ]; then
-      mv "botchatter.disabled.db" "botchatter.db"
-    fi
-
-    if [ -f "botprofilecoop.disabled.db" ]; then
-      mv "botprofilecoop.disabled.db" "botprofilecoop.db"
-    fi
-
-    if [ -f "botprofile.disabled.db" ]; then
-      mv "botprofile.disabled.db" "botprofile.db"
-    fi
-  fi
-}
-
 start() {
   echo '> Starting server ...'
 
   additionalParams=""
 
-  if [ -n "$CSGO_GSLT" ]; then
-    additionalParams+=" +sv_setsteamaccount $CSGO_GSLT"
-  else
-    echo '> Warning: Environment variable "CSGO_GSLT" is not set, but is required to run the server on the internet. Running the server in LAN mode instead.'
-    additionalParams+=" +sv_lan 1"
+  additionalParams+=" +sv_lan 0"
+
+  if [ -n "$VIETNAM_PW" ]; then
+    additionalParams+=" +sv_password $VIETNAM_PW"
   fi
 
-  if [ -n "$CSGO_PW" ]; then
-    additionalParams+=" +sv_password $CSGO_PW"
-  fi
-
-  if [ -n "$CSGO_HOSTNAME" ]; then
-    additionalParams+=" +hostname $CSGO_HOSTNAME"
+  if [ -n "$VIETNAM_HOSTNAME" ]; then
+    additionalParams+=" +hostname $VIETNAM_HOSTNAME"
     additionalParams+=
   fi
 
-  if [ -n "$CSGO_WS_API_KEY" ]; then
-    additionalParams+=" -authkey $CSGO_WS_API_KEY"
+  if [ -n "$VIETNAM_WS_API_KEY" ]; then
+    additionalParams+=" -authkey $VIETNAM_WS_API_KEY"
   fi
 
-  if [ "${CSGO_FORCE_NETSETTINGS-"false"}" = "true" ]; then
+  if [ "${VIETNAM_FORCE_NETSETTINGS-"false"}" = "true" ]; then
     additionalParams+=" +sv_minrate 786432 +sv_mincmdrate 128 +sv_minupdaterate 128"
   fi
 
-  if [ "${CSGO_TV_ENABLE-"false"}" = "true" ]; then
+  if [ "${VIETNAM_TV_ENABLE-"false"}" = "true" ]; then
     additionalParams+=" +tv_enable 1"
-    additionalParams+=" +tv_delaymapchange ${CSGO_TV_DELAYMAPCHANGE-1}"
-    additionalParams+=" +tv_delay ${CSGO_TV_DELAY-45}"
-    additionalParams+=" +tv_deltacache ${CSGO_TV_DELTACACHE-2}"
-    additionalParams+=" +tv_dispatchmode ${CSGO_TV_DISPATCHMODE-1}"
-    additionalParams+=" +tv_maxclients ${CSGO_TV_MAXCLIENTS-10}"
-    additionalParams+=" +tv_maxrate ${CSGO_TV_MAXRATE-0}"
-    additionalParams+=" +tv_overridemaster ${CSGO_TV_OVERRIDEMASTER-0}"
-    additionalParams+=" +tv_snapshotrate ${CSGO_TV_SNAPSHOTRATE-128}"
-    additionalParams+=" +tv_timeout ${CSGO_TV_TIMEOUT-60}"
-    additionalParams+=" +tv_transmitall ${CSGO_TV_TRANSMITALL-1}"
+    additionalParams+=" +tv_delaymapchange ${VIETNAM_TV_DELAYMAPCHANGE-1}"
+    additionalParams+=" +tv_delay ${VIETNAM_TV_DELAY-45}"
+    additionalParams+=" +tv_deltacache ${VIETNAM_TV_DELTACACHE-2}"
+    additionalParams+=" +tv_dispatchmode ${VIETNAM_TV_DISPATCHMODE-1}"
+    additionalParams+=" +tv_maxclients ${VIETNAM_TV_MAXCLIENTS-10}"
+    additionalParams+=" +tv_maxrate ${VIETNAM_TV_MAXRATE-0}"
+    additionalParams+=" +tv_overridemaster ${VIETNAM_TV_OVERRIDEMASTER-0}"
+    additionalParams+=" +tv_snapshotrate ${VIETNAM_TV_SNAPSHOTRATE-128}"
+    additionalParams+=" +tv_timeout ${VIETNAM_TV_TIMEOUT-60}"
+    additionalParams+=" +tv_transmitall ${VIETNAM_TV_TRANSMITALL-1}"
 
-    if [ -n "${CSGO_TV_NAME}" ]; then
-      additionalParams+=" +tv_name ${CSGO_TV_NAME}"
+    if [ -n "${VIETNAM_TV_NAME}" ]; then
+      additionalParams+=" +tv_name ${VIETNAM_TV_NAME}"
     fi
 
-    if [ -n "${CSGO_TV_PORT}" ]; then
-      additionalParams+=" +tv_port ${CSGO_TV_PORT}"
+    if [ -n "${VIETNAM_TV_PORT}" ]; then
+      additionalParams+=" +tv_port ${VIETNAM_TV_PORT}"
     fi
 
-    if [ -n "${CSGO_TV_PASSWORD}" ]; then
-      additionalParams+=" +tv_password ${CSGO_TV_PASSWORD}"
+    if [ -n "${VIETNAM_TV_PASSWORD}" ]; then
+      additionalParams+=" +tv_password ${VIETNAM_TV_PASSWORD}"
     fi
   fi
 
   set -x
 
   exec $server_dir/srcds_run \
-    -game csgo \
+    -game vietnam \
     -console \
     -norestart \
     -usercon \
     -nobreakpad \
-    +ip "${CSGO_IP-0.0.0.0}" \
-    -port "${CSGO_PORT-27015}" \
-    -tickrate "${CSGO_TICKRATE-128}" \
-    -maxplayers_override "${CSGO_MAX_PLAYERS-16}" \
-    +game_type "${CSGO_GAME_TYPE-0}" \
-    +game_mode "${CSGO_GAME_MODE-1}" \
-    +mapgroup "${CSGO_MAP_GROUP-mg_active}" \
-    +map "${CSGO_MAP-de_dust2}" \
-    +rcon_password "${CSGO_RCON_PW-changeme}" \
+    +ip "${VIETNAM_IP-0.0.0.0}" \
+    -port "${VIETNAM_PORT-27015}" \
+    -tickrate "${VIETNAM_TICKRATE-64}" \
+    -maxplayers_override "${VIETNAM_MAX_PLAYERS-16}" \
+    +game_type "${VIETNAM_GAME_TYPE-0}" \
+    +game_mode "${VIETNAM_GAME_MODE-1}" \
+    +mapgroup "${VIETNAM_MAP_GROUP-1}" \
+    +map "${VIETNAM_MAP-mcv_port}" \
+    +rcon_password "${VIETNAM_RCON_PW-changeme}" \
     $additionalParams \
-    $CSGO_PARAMS
+    $VIETNAM_PARAMS
 }
 
 update() {
@@ -192,7 +135,7 @@ update() {
     $steam_dir/steamcmd.sh \
       +force_install_dir $server_dir \
       +login anonymous \
-      +app_update 740 validate \
+      +app_update 1136190 validate \
       +quit
 
     set +x
@@ -202,7 +145,7 @@ update() {
     $steam_dir/steamcmd.sh \
       +force_install_dir $server_dir \
       +login anonymous \
-      +app_update 740 \
+      +app_update 1136190 \
       +quit
 
     set +x
@@ -223,8 +166,6 @@ if [ ! -z $1 ]; then
   $1
 else
   install_or_update
-  should_add_server_configs
-  should_disable_bots
   sync_custom_files
   start
 fi

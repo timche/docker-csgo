@@ -13,22 +13,22 @@ RUN apt-get update \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && rm -rf /var/lib/apt/lists/* \
-    && useradd -m csgo
+    && useradd -m vietnam
 
-USER csgo
+USER vietnam
 
-RUN mkdir /home/csgo/Steam && \
-    mkdir /home/csgo/server
+RUN mkdir /home/vietnam/Steam && \
+    mkdir /home/vietnam/server
 
-WORKDIR /home/csgo/Steam
+WORKDIR /home/vietnam/Steam
 
 RUN wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxf - \
-    && /home/csgo/Steam/steamcmd.sh +quit \
-    && mkdir -p /home/csgo/.steam/sdk32 \
-    && ln -s /home/csgo/Steam/linux32/steamclient.so /home/csgo/.steam/sdk32/steamclient.so
+    && /home/vietnam/Steam/steamcmd.sh +quit \
+    && mkdir -p /home/vietnam/.steam/sdk64 \
+    && ln -s /home/vietnam/Steam/linux64/steamclient.so /home/vietnam/.steam/sdk64/steamclient.so
 
-WORKDIR /home/csgo
+WORKDIR /home/vietnam
 
 COPY server.sh .
 
-CMD [ "/home/csgo/server.sh" ]
+CMD [ "/home/vietnam/server.sh" ]

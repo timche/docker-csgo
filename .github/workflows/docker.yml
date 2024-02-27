@@ -17,23 +17,11 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./base
-          tags: timche/csgo:latest,timche/csgo:${{ github.event.release.tag_name }}
-          push: true
-      - name: sourcemod
-        uses: docker/build-push-action@v3
-        with:
-          context: ./sourcemod
-          tags: timche/csgo:sourcemod,timche/csgo:sourcemod-${{ github.event.release.tag_name }}
-          push: true
-      - name: pug-practice
-        uses: docker/build-push-action@v3
-        with:
-          context: ./pug-practice
-          tags: timche/csgo:pug-practice,timche/csgo:pug-practice-${{ github.event.release.tag_name }}
+          tags: maxaucube/docker-vietnam:latest,maxaucube/docker-vietnam:${{ github.event.release.tag_name }}
           push: true
       - name: sync-description-with-readme
         uses: peter-evans/dockerhub-description@v3.1.2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-          repository: timche/csgo
+          repository: maxaucube/docker-vietnam

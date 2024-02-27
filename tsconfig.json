@@ -1,6 +1,0 @@
-{
-  "extends": "@tsconfig/node16",
-  "compilerOptions": {
-    "module": "ESNext"
-  }
-}
