@@ -16,7 +16,7 @@ sourcemod_plugins_dir=$csgo_dir/addons/sourcemod/plugins
 
 mmsource_exact_version="${METAMOD_VERSION-"1.11.0"}"
 mmsource_version=$(echo ${mmsource_exact_version} | cut -f1-2 -d '.')
-mmsource_url="https://mms.alliedmods.net/mmsdrop/${mmsource_version}/mmsource-${mmsource_exact_version}-git${METAMOD_BUILD-1154}-linux.tar.gz"
+mmsource_url="https://mms.alliedmods.net/mmsdrop/${mmsource_version}/mmsource-${mmsource_exact_version}-git${METAMOD_BUILD-1155}-linux.tar.gz"
 
 sourcemod_exact_version="${SOURCEMOD_VERSION-"1.11.0"}"
 sourcemod_version=$(echo ${sourcemod_exact_version} | cut -f1-2 -d '.')
