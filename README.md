@@ -326,7 +326,7 @@ Default: `1.12.0`
 
 > _`sourcemod`, `pug-practice` image only._
 
-Default: `7166`
+Default: `7167`
 
 [SourceMod build number](https://www.sourcemod.net/downloads.php?branch=stable) running on the server. Changing this will update/downgrade it on container start. Build number must exist at version.
 
