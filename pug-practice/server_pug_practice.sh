@@ -97,9 +97,10 @@ set_damageprint_cvars() {
     pugsetup_damageprint_cfg="${csgo_dir}/cfg/sourcemod/pugsetup/pugsetup_damageprint.cfg"
 
     if [ -f "${pugsetup_damageprint_cfg}" ]; then
-      for cvar_value in $(echo $PUGSETUP_DAMAGEPRINT_CVARS | sed "s/,/ /g"); do
+      IFS=, read -ra cvar_values <<< "$PUGSETUP_DAMAGEPRINT_CVARS"
+      for cvar_value in "${cvar_values[@]}"; do
         cvar=$(echo $cvar_value | cut -f1 -d=)
-        value=$(echo $cvar_value | cut -f2 -d=)
+        value=$(echo $cvar_value | cut -f2 -d= | sed "s,/,\\\/,g")
 
         sed -i "s/${cvar} \"[^\]*\"/${cvar} \"${value}\"/g" $pugsetup_damageprint_cfg
       done
