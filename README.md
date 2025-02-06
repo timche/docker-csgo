@@ -20,6 +20,9 @@
 
 > [Counter-Strike: Global Offensive (CS:GO) Dedicated Server](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers) with automated/manual updating and optional [SourceMod](https://www.sourcemod.net/) and [PugSetup](https://github.com/splewis/csgo-pug-setup)/[PracticeMode](https://github.com/splewis/csgo-practice-mode) integrations
 
+> [!WARNING]
+> This Docker image isn't maintained anymore since the release of Counter-Strike 2.
+
 ℹ️ _Run your CS:GO server on [Hetzner Cloud](https://hetzner.cloud/?ref=v4lzGIPSIrNk) for as low as €6.37/months with 2 vCPUs, 4 GB RAM, 40 GB storage and great performance (low sv/var)! Use [my referral link](https://hetzner.cloud/?ref=v4lzGIPSIrNk) to receive **€20 cloud credits for free** as soon as you sign up!_
 
 ## Table of Contents
